@@ -1,0 +1,3081 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#080d19">
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+<title>Ma Liste</title>
+
+<style>
+
+/* =========================================================
+   RESET
+========================================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background:
+        radial-gradient(circle at 20% 0%, #17234a 0%, transparent 35%),
+        radial-gradient(circle at 100% 20%, #111d3d 0%, transparent 30%),
+        #070b14;
+    color: #ffffff;
+    min-height: 100vh;
+}
+
+/* =========================================================
+   VARIABLES
+========================================================= */
+
+:root {
+    --bg: #080d19;
+    --card: #111827;
+    --card2: #151e2f;
+    --border: #263249;
+
+    --purple: #8b5cf6;
+    --blue: #6366f1;
+    --cyan: #22d3ee;
+    --green: #22c55e;
+    --orange: #f59e0b;
+    --red: #f43f5e;
+
+    --text: #ffffff;
+    --muted: #8994a8;
+}
+
+/* =========================================================
+   APP
+========================================================= */
+
+.app {
+    width: 100%;
+    max-width: 1200px;
+    margin: auto;
+    min-height: 100vh;
+    padding-bottom: 90px;
+}
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.topbar {
+    height: 75px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 25px;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.logo {
+    width: 45px;
+    height: 45px;
+    border-radius: 14px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background:
+        linear-gradient(135deg,#6366f1,#8b5cf6 50%,#22d3ee);
+
+    font-size: 25px;
+    box-shadow: 0 0 25px rgba(99,102,241,.25);
+}
+
+.brand h1 {
+    font-size: 21px;
+}
+
+.brand p {
+    color: var(--muted);
+    font-size: 11px;
+    margin-top: 3px;
+}
+
+.top-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.icon-btn {
+    width: 42px;
+    height: 42px;
+    border-radius: 13px;
+    border: 1px solid var(--border);
+    background: var(--card);
+    color: white;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+.icon-btn:hover {
+    background: #202b43;
+}
+
+/* =========================================================
+   PAGES
+========================================================= */
+
+.page {
+    display: none;
+    padding: 25px;
+}
+
+.page.active {
+    display: block;
+}
+
+/* =========================================================
+   WELCOME
+========================================================= */
+
+.welcome {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.welcome h2 {
+    font-size: 25px;
+    margin-bottom: 7px;
+}
+
+.welcome p {
+    color: var(--muted);
+    font-size: 14px;
+}
+
+.avatar {
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: linear-gradient(135deg,#4935d5,#8b5cf6);
+    font-size: 24px;
+    border: 2px solid rgba(255,255,255,.1);
+}
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.hero {
+    position: relative;
+    overflow: hidden;
+
+    min-height: 180px;
+    border-radius: 20px;
+    padding: 28px;
+
+    margin-bottom: 25px;
+
+    background:
+        radial-gradient(circle at 90% 40%, rgba(34,211,238,.3), transparent 25%),
+        linear-gradient(120deg,#2728c9,#692ce8 55%,#1c72dc);
+
+    box-shadow: 0 20px 50px rgba(32,46,180,.18);
+}
+
+.hero h2 {
+    font-size: 25px;
+    line-height: 1.15;
+    max-width: 300px;
+}
+
+.hero p {
+    color: rgba(255,255,255,.8);
+    margin-top: 10px;
+    max-width: 330px;
+    line-height: 1.5;
+    font-size: 13px;
+}
+
+.hero-decoration {
+    position: absolute;
+    right: 30px;
+    bottom: 15px;
+    font-size: 90px;
+    opacity: .25;
+}
+
+/* =========================================================
+   STATS CARDS
+========================================================= */
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    gap: 12px;
+    margin-bottom: 25px;
+}
+
+.stat-card {
+    min-height: 100px;
+    padding: 15px;
+
+    border-radius: 16px;
+    background: rgba(17,24,39,.85);
+    border: 1px solid var(--border);
+}
+
+.stat-icon {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.stat-number {
+    font-size: 23px;
+    font-weight: bold;
+}
+
+.stat-label {
+    color: var(--muted);
+    font-size: 11px;
+    margin-top: 4px;
+}
+
+.stat-line {
+    height: 3px;
+    width: 35px;
+    border-radius: 10px;
+    margin-top: 10px;
+}
+
+.stat-card:nth-child(1) .stat-line {
+    background: var(--purple);
+}
+
+.stat-card:nth-child(2) .stat-line {
+    background: var(--green);
+}
+
+.stat-card:nth-child(3) .stat-line {
+    background: var(--orange);
+}
+
+.stat-card:nth-child(4) .stat-line {
+    background: var(--red);
+}
+
+/* =========================================================
+   SECTION HEADER
+========================================================= */
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.section-header h3 {
+    font-size: 18px;
+}
+
+.section-header button {
+    border: none;
+    background: transparent;
+    color: var(--purple);
+    cursor: pointer;
+}
+
+/* =========================================================
+   FILTERS
+========================================================= */
+
+.filters {
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    padding-bottom: 4px;
+    margin-bottom: 15px;
+}
+
+.filter {
+    white-space: nowrap;
+    border: 1px solid var(--border);
+    background: #121a2a;
+    color: var(--muted);
+
+    padding: 9px 15px;
+    border-radius: 10px;
+
+    cursor: pointer;
+    font-size: 12px;
+}
+
+.filter.active {
+    background: linear-gradient(135deg,#5843ec,#793ce9);
+    color: white;
+    border-color: transparent;
+}
+
+/* =========================================================
+   TASK
+========================================================= */
+
+.task-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.task {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+
+    padding: 15px;
+
+    border-radius: 15px;
+
+    background: rgba(17,24,39,.9);
+    border: 1px solid var(--border);
+
+    transition: .2s;
+}
+
+.task:hover {
+    transform: translateY(-1px);
+    border-color: #3a4864;
+}
+
+.task-check {
+    width: 23px;
+    height: 23px;
+    border-radius: 50%;
+
+    border: 2px solid #65728b;
+    background: transparent;
+
+    cursor: pointer;
+    flex-shrink: 0;
+}
+
+.task.done .task-check {
+    background: var(--green);
+    border-color: var(--green);
+
+    position: relative;
+}
+
+.task.done .task-check::after {
+    content: "✓";
+    position: absolute;
+    left: 4px;
+    top: 0;
+    color: white;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.task-content {
+    flex: 1;
+    min-width: 0;
+}
+
+.task-title {
+    font-size: 14px;
+    margin-bottom: 7px;
+}
+
+.task.done .task-title {
+    text-decoration: line-through;
+    color: #68758c;
+}
+
+.task-info {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 9px;
+
+    color: var(--muted);
+    font-size: 10px;
+}
+
+.priority {
+    font-weight: bold;
+}
+
+.high {
+    color: var(--red);
+}
+
+.medium {
+    color: var(--orange);
+}
+
+.low {
+    color: var(--green);
+}
+
+.task-star {
+    background: transparent;
+    border: none;
+    color: #66738a;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+.task-star.favorite {
+    color: #fbbf24;
+}
+
+.delete-task {
+    border: none;
+    background: transparent;
+    color: #68758c;
+    cursor: pointer;
+}
+
+.delete-task:hover {
+    color: var(--red);
+}
+
+/* =========================================================
+   FLOATING ADD BUTTON
+========================================================= */
+
+.floating-add {
+    position: fixed;
+
+    right: 30px;
+    bottom: 85px;
+
+    width: 58px;
+    height: 58px;
+
+    border: none;
+    border-radius: 50%;
+
+    background: linear-gradient(135deg,#6d42f5,#923cff);
+    color: white;
+
+    font-size: 30px;
+    cursor: pointer;
+
+    box-shadow: 0 10px 30px rgba(111,65,245,.4);
+
+    z-index: 20;
+}
+
+.floating-add:hover {
+    transform: scale(1.05);
+}
+
+/* =========================================================
+   CALENDAR
+========================================================= */
+
+.calendar-card {
+    background: rgba(17,24,39,.9);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 20px;
+}
+
+.calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.calendar-header h2 {
+    font-size: 18px;
+}
+
+.calendar-buttons button {
+    width: 35px;
+    height: 35px;
+    border: 1px solid var(--border);
+    background: #151e2e;
+    color: white;
+    border-radius: 9px;
+    cursor: pointer;
+}
+
+.weekdays,
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7,1fr);
+    gap: 6px;
+}
+
+.weekdays div {
+    text-align: center;
+    color: var(--muted);
+    font-size: 10px;
+    padding-bottom: 8px;
+}
+
+.day {
+    min-height: 42px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border-radius: 10px;
+
+    color: #d8deeb;
+    cursor: pointer;
+    font-size: 12px;
+}
+
+.day:hover {
+    background: #202a3e;
+}
+
+.day.other {
+    color: #414c61;
+}
+
+.day.today {
+    background: linear-gradient(135deg,#4d63f5,#7d3ef1);
+    color: white;
+    font-weight: bold;
+}
+
+.day.has-task::after {
+    content: "";
+    position: absolute;
+}
+
+.selected-date {
+    margin-top: 20px;
+    padding: 15px;
+
+    background: #121b2b;
+    border-radius: 13px;
+
+    color: #cfd6e4;
+}
+
+/* =========================================================
+   STATISTICS
+========================================================= */
+
+.analytics {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+
+.analytics-card {
+    background: rgba(17,24,39,.9);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 20px;
+}
+
+.analytics-card h3 {
+    margin-bottom: 20px;
+    font-size: 16px;
+}
+
+.donut-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.donut {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+
+    background:
+        conic-gradient(
+            var(--green) 0 65%,
+            var(--orange) 65% 82%,
+            var(--red) 82% 100%
+        );
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.donut::after {
+    content: "";
+    width: 105px;
+    height: 105px;
+
+    background: #111827;
+    border-radius: 50%;
+}
+
+.donut-text {
+    position: absolute;
+    text-align: center;
+    z-index: 2;
+}
+
+.donut-text strong {
+    font-size: 25px;
+    display: block;
+}
+
+.donut-text span {
+    color: var(--muted);
+    font-size: 10px;
+}
+
+/* =========================================================
+   BAR CHART
+========================================================= */
+
+.chart {
+    height: 180px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-around;
+    gap: 8px;
+}
+
+.bar-wrapper {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    height: 100%;
+}
+
+.bar {
+    width: 70%;
+    max-width: 30px;
+
+    border-radius: 7px 7px 2px 2px;
+
+    background: linear-gradient(to top,#4f46e5,#8b5cf6);
+}
+
+.bar-label {
+    color: var(--muted);
+    font-size: 9px;
+    margin-top: 7px;
+}
+
+/* =========================================================
+   PROFILE
+========================================================= */
+
+.profile-card {
+    background: rgba(17,24,39,.9);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 25px;
+}
+
+.profile-top {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+
+    margin-bottom: 25px;
+}
+
+.profile-avatar {
+    width: 70px;
+    height: 70px;
+
+    border-radius: 50%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background: linear-gradient(135deg,#4f35d5,#9344f4);
+    font-size: 30px;
+}
+
+.profile-name {
+    font-size: 19px;
+    font-weight: bold;
+}
+
+.profile-email {
+    color: var(--muted);
+    font-size: 12px;
+    margin-top: 5px;
+}
+
+.profile-option {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 16px 0;
+
+    border-top: 1px solid #202b3d;
+
+    cursor: pointer;
+}
+
+.profile-option-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.profile-option-left span:first-child {
+    width: 32px;
+    text-align: center;
+}
+
+.profile-option-title {
+    font-size: 13px;
+}
+
+.profile-option-subtitle {
+    color: var(--muted);
+    font-size: 10px;
+    margin-top: 3px;
+}
+
+/* =========================================================
+   SEARCH
+========================================================= */
+
+.search-box {
+    display: flex;
+    align-items: center;
+
+    background: #121a29;
+    border: 1px solid var(--border);
+
+    border-radius: 13px;
+
+    padding: 0 15px;
+
+    margin-bottom: 18px;
+}
+
+.search-box span {
+    font-size: 17px;
+}
+
+.search-box input {
+    width: 100%;
+    height: 48px;
+
+    border: none;
+    outline: none;
+
+    background: transparent;
+
+    color: white;
+
+    padding-left: 10px;
+}
+
+.search-box input::placeholder {
+    color: #69758b;
+}
+
+/* =========================================================
+   BOTTOM NAVIGATION
+========================================================= */
+
+.bottom-nav {
+    position: fixed;
+
+    bottom: 0;
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    width: 100%;
+    max-width: 700px;
+
+    height: 68px;
+
+    display: grid;
+    grid-template-columns: repeat(5,1fr);
+
+    background: rgba(10,15,25,.96);
+
+    backdrop-filter: blur(20px);
+
+    border-top: 1px solid #202a3b;
+
+    z-index: 30;
+}
+
+.nav-item {
+    border: none;
+    background: transparent;
+
+    color: #67738a;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    gap: 4px;
+
+    cursor: pointer;
+
+    font-size: 10px;
+}
+
+.nav-icon {
+    font-size: 19px;
+}
+
+.nav-item.active {
+    color: #8b5cf6;
+}
+
+.nav-item.active .nav-icon {
+    transform: translateY(-1px);
+}
+
+/* =========================================================
+   MODAL
+========================================================= */
+
+.modal {
+    position: fixed;
+
+    inset: 0;
+
+    background: rgba(0,0,0,.7);
+
+    display: none;
+
+    justify-content: center;
+    align-items: center;
+
+    padding: 20px;
+
+    z-index: 100;
+}
+
+.modal.show {
+    display: flex;
+}
+
+.modal-box {
+    width: 100%;
+    max-width: 450px;
+
+    background: #111827;
+
+    border: 1px solid #2c3850;
+
+    border-radius: 20px;
+
+    padding: 25px;
+
+    box-shadow: 0 30px 80px rgba(0,0,0,.5);
+}
+
+.modal-box h2 {
+    margin-bottom: 20px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    color: #a4afc1;
+    font-size: 12px;
+    margin-bottom: 7px;
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+    height: 45px;
+
+    border-radius: 10px;
+
+    border: 1px solid #2a3850;
+
+    background: #0c1321;
+
+    color: white;
+
+    padding: 0 12px;
+
+    outline: none;
+}
+
+.modal-buttons {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.modal-buttons button {
+    flex: 1;
+    height: 45px;
+
+    border: none;
+    border-radius: 10px;
+
+    cursor: pointer;
+}
+
+.cancel-btn {
+    background: #222c3e;
+    color: white;
+}
+
+.save-btn {
+    background: linear-gradient(135deg,#5d4cf1,#8b3ff0);
+    color: white;
+}
+
+/* =========================================================
+   EMPTY
+========================================================= */
+
+.empty {
+    text-align: center;
+    color: var(--muted);
+    padding: 40px;
+    display: none;
+}
+
+.empty-icon {
+    font-size: 40px;
+    margin-bottom: 10px;
+}
+
+/* =========================================================
+   TOAST
+========================================================= */
+
+.toast {
+    position: fixed;
+
+    left: 50%;
+    bottom: 85px;
+
+    transform: translateX(-50%) translateY(20px);
+
+    background: #1d293c;
+
+    border: 1px solid #35445e;
+
+    color: white;
+
+    padding: 12px 18px;
+
+    border-radius: 10px;
+
+    font-size: 12px;
+
+    opacity: 0;
+
+    pointer-events: none;
+
+    transition: .3s;
+
+    z-index: 200;
+}
+
+.toast.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+}
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 700px) {
+
+    .app {
+        max-width: 100%;
+    }
+
+    .page {
+        padding: 18px;
+    }
+
+    .topbar {
+        padding: 0 18px;
+    }
+
+    .stats-grid {
+        grid-template-columns: repeat(2,1fr);
+    }
+
+    .analytics {
+        grid-template-columns: 1fr;
+    }
+
+    .hero {
+        min-height: 165px;
+    }
+
+    .hero-decoration {
+        font-size: 70px;
+        right: 15px;
+    }
+
+    .floating-add {
+        right: 20px;
+    }
+}
+
+@media (min-width: 900px) {
+
+    .page {
+        padding-left: 35px;
+        padding-right: 35px;
+    }
+
+    .home-layout {
+        display: grid;
+        grid-template-columns: 1.5fr 1fr;
+        gap: 20px;
+    }
+
+}
+
+/* =========================================================
+   DESKTOP
+========================================================= */
+
+@media (min-width: 1000px) {
+
+    .bottom-nav {
+        border: 1px solid #27334a;
+        border-radius: 18px 18px 0 0;
+    }
+
+}
+
+
+/* --- Profil fonctionnel --- */
+.profile-option{cursor:pointer;transition:.2s}
+.profile-option:hover{background:#151f31;border-radius:12px;padding-left:10px;padding-right:10px}
+.profile-option .arrow{color:#748198;font-size:20px}
+.switch{position:relative;width:44px;height:24px;display:inline-block}
+.switch input{opacity:0;width:0;height:0}
+.slider{position:absolute;inset:0;background:#334155;border-radius:20px;cursor:pointer;transition:.2s}
+.slider:before{content:"";position:absolute;width:18px;height:18px;left:3px;top:3px;background:white;border-radius:50%;transition:.2s}
+.switch input:checked+.slider{background:#7c3aed}
+.switch input:checked+.slider:before{transform:translateX(20px)}
+.avatar-upload{display:flex;align-items:center;gap:15px}
+.avatar-preview{width:72px;height:72px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#4f35d5,#9344f4);font-size:30px;overflow:hidden}
+.avatar-preview img{width:100%;height:100%;object-fit:cover}
+.small-btn{border:1px solid #34425a;background:#172033;color:#fff;border-radius:9px;padding:9px 12px;cursor:pointer}
+.danger-btn{background:#3a1722;color:#ff8da0;border:1px solid #6d2638;border-radius:9px;padding:10px 12px;cursor:pointer;width:100%}
+.info-box{background:#0d1524;border:1px solid #26344b;border-radius:12px;padding:13px;color:#aeb8c9;font-size:12px;line-height:1.6}
+.compact-mode .task{padding:9px 12px}.compact-mode .task-info{gap:6px}
+#profileModal{z-index:200}\n
+.profile-menu-wrap{position:relative}
+.profile-menu{position:absolute;right:0;top:44px;min-width:220px;background:#111a2b;border:1px solid #2b3952;border-radius:12px;box-shadow:0 15px 35px rgba(0,0,0,.35);padding:6px;display:none;z-index:1000}
+.profile-menu.show{display:block}
+.profile-menu button{display:block;width:100%;border:0;background:transparent;color:#e8edf7;text-align:left;padding:11px 12px;border-radius:8px;cursor:pointer;font-size:14px}
+.profile-menu button:hover{background:#1b2940}
+.task-actions{display:flex;align-items:center;gap:4px}
+.edit-task{border:0;background:transparent;color:#8ea0bb;font-size:16px;cursor:pointer;padding:7px;border-radius:8px}
+.edit-task:hover{background:#1b2940;color:#fff}
+</style>
+</head>
+
+
+<body>
+
+<div class="app">
+
+<!-- =====================================================
+     HEADER
+===================================================== -->
+
+<header class="topbar">
+
+    <div class="brand">
+
+        <div class="logo">
+            ✓
+        </div>
+
+        <div>
+            <h1>Ma Liste</h1>
+            <p>Organisez votre journée</p>
+        </div>
+
+    </div>
+
+    <div class="top-actions">
+
+        <button class="icon-btn" onclick="showToast('Aucune nouvelle notification')">
+            🔔
+        </button>
+
+        <button class="icon-btn" onclick="showToast('Bienvenue dans Ma Liste')">
+            ⋮
+        </button>
+
+    </div>
+
+</header>
+
+
+<!-- =====================================================
+     ACCUEIL
+===================================================== -->
+
+<section class="page active" id="homePage">
+
+    <div class="welcome">
+
+        <div>
+
+            <h2>Bonjour, Ladji 👋</h2>
+
+            <p>
+                Organisez vos tâches simplement<br>
+                et efficacement
+            </p>
+
+        </div>
+
+        <div class="avatar">
+            👤
+        </div>
+
+    </div>
+
+
+    <div class="hero">
+
+        <h2>
+            Planifiez.<br>
+            Organisez.<br>
+            Accomplissez.
+        </h2>
+
+        <p>
+            Chaque tâche vous rapproche de vos objectifs.
+        </p>
+
+        <div class="hero-decoration">
+            📋
+        </div>
+
+    </div>
+
+
+    <div class="stats-grid">
+
+        <div class="stat-card">
+
+            <div class="stat-icon">▣</div>
+
+            <div class="stat-number" id="totalStat">
+                0
+            </div>
+
+            <div class="stat-label">
+                Toutes
+            </div>
+
+            <div class="stat-line"></div>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <div class="stat-icon">✓</div>
+
+            <div class="stat-number" id="doneStat">
+                0
+            </div>
+
+            <div class="stat-label">
+                Terminées
+            </div>
+
+            <div class="stat-line"></div>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <div class="stat-icon">◷</div>
+
+            <div class="stat-number" id="progressStat">
+                0
+            </div>
+
+            <div class="stat-label">
+                En cours
+            </div>
+
+            <div class="stat-line"></div>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <div class="stat-icon">⚑</div>
+
+            <div class="stat-number" id="waitingStat">
+                0
+            </div>
+
+            <div class="stat-label">
+                En attente
+            </div>
+
+            <div class="stat-line"></div>
+
+        </div>
+
+    </div>
+
+
+    <div class="section-header">
+
+        <h3>Mes tâches</h3>
+
+        <button onclick="openModal()">
+            + Ajouter
+        </button>
+
+    </div>
+
+
+    <div class="filters">
+
+        <button
+            class="filter active"
+            onclick="setFilter('all',this)">
+            Toutes
+        </button>
+
+        <button
+            class="filter"
+            onclick="setFilter('progress',this)">
+            En cours
+        </button>
+
+        <button
+            class="filter"
+            onclick="setFilter('waiting',this)">
+            En attente
+        </button>
+
+        <button
+            class="filter"
+            onclick="setFilter('done',this)">
+            Terminées
+        </button>
+
+    </div>
+
+
+    <div class="task-list" id="homeTaskList"></div>
+
+    <div class="empty" id="homeEmpty">
+
+        <div class="empty-icon">
+            📝
+        </div>
+
+        <p>
+            Aucune tâche trouvée
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     CALENDRIER
+===================================================== -->
+
+<section class="page" id="calendarPage">
+
+    <div class="section-header">
+
+        <h3>Calendrier</h3>
+
+        <button onclick="goToday()">
+            Aujourd'hui
+        </button>
+
+    </div>
+
+
+    <div class="calendar-card">
+
+        <div class="calendar-header">
+
+            <button
+                class="icon-btn"
+                onclick="changeMonth(-1)">
+                ‹
+            </button>
+
+            <h2 id="calendarTitle">
+                Avril 2026
+            </h2>
+
+            <button
+                class="icon-btn"
+                onclick="changeMonth(1)">
+                ›
+            </button>
+
+        </div>
+
+
+        <div class="weekdays">
+
+            <div>Lun</div>
+            <div>Mar</div>
+            <div>Mer</div>
+            <div>Jeu</div>
+            <div>Ven</div>
+            <div>Sam</div>
+            <div>Dim</div>
+
+        </div>
+
+
+        <div
+            class="calendar-grid"
+            id="calendarGrid">
+        </div>
+
+
+        <div
+            class="selected-date"
+            id="selectedDate">
+            Sélectionnez une date
+        </div>
+
+    </div>
+
+
+    <br>
+
+
+    <div class="section-header">
+
+        <h3>Tâches du jour</h3>
+
+    </div>
+
+
+    <div
+        class="task-list"
+        id="calendarTaskList">
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     TACHES
+===================================================== -->
+
+<section class="page" id="tasksPage">
+
+    <div class="section-header">
+
+        <h3>Mes tâches</h3>
+
+        <button onclick="openModal()">
+            + Ajouter
+        </button>
+
+    </div>
+
+
+    <div class="search-box">
+
+        <span>🔍</span>
+
+        <input
+            id="searchInput"
+            type="text"
+            placeholder="Rechercher une tâche..."
+            oninput="renderTasksPage()">
+
+    </div>
+
+
+    <div
+        class="task-list"
+        id="allTaskList">
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     STATISTIQUES
+===================================================== -->
+
+<section class="page" id="statsPage">
+
+    <div class="section-header">
+
+        <h3>Statistiques</h3>
+
+        <button>
+            Cette semaine
+        </button>
+
+    </div>
+
+
+    <div class="analytics">
+
+        <div class="analytics-card">
+
+            <h3>
+                Tâches terminées
+            </h3>
+
+            <div class="donut-container">
+
+                <div class="donut">
+
+                    <div class="donut-text">
+
+                        <strong id="percentage">
+                            0%
+                        </strong>
+
+                        <span>
+                            terminées
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="analytics-card">
+
+            <h3>
+                Productivité
+            </h3>
+
+            <div class="chart">
+
+                <div class="bar-wrapper">
+
+                    <div
+                        class="bar"
+                        style="height:35%">
+                    </div>
+
+                    <span class="bar-label">
+                        Lun
+                    </span>
+
+                </div>
+
+
+                <div class="bar-wrapper">
+
+                    <div
+                        class="bar"
+                        style="height:50%">
+                    </div>
+
+                    <span class="bar-label">
+                        Mar
+                    </span>
+
+                </div>
+
+
+                <div class="bar-wrapper">
+
+                    <div
+                        class="bar"
+                        style="height:45%">
+                    </div>
+
+                    <span class="bar-label">
+                        Mer
+                    </span>
+
+                </div>
+
+
+                <div class="bar-wrapper">
+
+                    <div
+                        class="bar"
+                        style="height:70%">
+                    </div>
+
+                    <span class="bar-label">
+                        Jeu
+                    </span>
+
+                </div>
+
+
+                <div class="bar-wrapper">
+
+                    <div
+                        class="bar"
+                        style="height:80%">
+                    </div>
+
+                    <span class="bar-label">
+                        Ven
+                    </span>
+
+                </div>
+
+
+                <div class="bar-wrapper">
+
+                    <div
+                        class="bar"
+                        style="height:76%">
+                    </div>
+
+                    <span class="bar-label">
+                        Sam
+                    </span>
+
+                </div>
+
+
+                <div class="bar-wrapper">
+
+                    <div
+                        class="bar"
+                        style="height:95%">
+                    </div>
+
+                    <span class="bar-label">
+                        Dim
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     PROFIL
+===================================================== -->
+
+<section class="page" id="profilePage">
+<div class="section-header">
+<h3>Profil</h3>
+<div class="profile-menu-wrap">
+<button class="icon-btn" aria-label="Plus d'options" onclick="toggleProfileMenu(event)">⋯</button>
+<div class="profile-menu" id="profileMenu">
+<button onclick="openProfileModal('account');closeProfileMenu()">👤 Mon compte</button>
+<button onclick="openProfileModal('preferences');closeProfileMenu()">⚙ Préférences</button>
+<button onclick="openProfileModal('notifications');closeProfileMenu()">🔔 Notifications</button>
+<button onclick="openProfileModal('backup');closeProfileMenu()">☁ Sauvegarde</button>
+<button onclick="openProfileModal('about');closeProfileMenu()">ⓘ À propos</button>
+</div>
+</div>
+</div>
+<div class="profile-card">
+<div class="profile-top">
+<div class="profile-avatar" id="mainAvatar">👤</div>
+<div><div class="profile-name" id="mainProfileName">Ladji Fofana</div><div class="profile-email" id="mainProfileEmail">ladji.f@gmail.com</div></div>
+</div>
+
+<div class="profile-option" onclick="openProfileModal('account')">
+<div class="profile-option-left"><span>♙</span><div><div class="profile-option-title">Mon compte</div><div class="profile-option-subtitle">Modifier votre nom, e-mail et photo</div></div></div><span class="arrow">›</span>
+</div>
+
+<div class="profile-option" onclick="openProfileModal('preferences')">
+<div class="profile-option-left"><span>⚙</span><div><div class="profile-option-title">Préférences</div><div class="profile-option-subtitle">Personnaliser l'application</div></div></div><span class="arrow">›</span>
+</div>
+
+<div class="profile-option" onclick="openProfileModal('notifications')">
+<div class="profile-option-left"><span>🔔</span><div><div class="profile-option-title">Notifications</div><div class="profile-option-subtitle" id="notificationSubtitle">Gérer les rappels</div></div></div><span class="arrow">›</span>
+</div>
+
+<div class="profile-option" onclick="openProfileModal('backup')">
+<div class="profile-option-left"><span>☁</span><div><div class="profile-option-title">Sauvegarde</div><div class="profile-option-subtitle">Exporter ou importer vos tâches</div></div></div><span class="arrow">›</span>
+</div>
+
+<div class="profile-option" onclick="openProfileModal('about')">
+<div class="profile-option-left"><span>ⓘ</span><div><div class="profile-option-title">À propos</div><div class="profile-option-subtitle">Ma Liste v1.1</div></div></div><span class="arrow">›</span>
+</div>
+</div>
+</section>
+
+
+</div>
+
+
+<!-- =====================================================
+     BOUTON AJOUT
+===================================================== -->
+
+<button
+    class="floating-add"
+    onclick="openModal()">
+    +
+</button>
+
+
+<!-- =====================================================
+     NAVIGATION
+===================================================== -->
+
+<nav class="bottom-nav">
+
+    <button
+        class="nav-item active"
+        onclick="showPage('homePage',this)">
+
+        <span class="nav-icon">⌂</span>
+
+        <span>Accueil</span>
+
+    </button>
+
+
+    <button
+        class="nav-item"
+        onclick="showPage('calendarPage',this)">
+
+        <span class="nav-icon">▣</span>
+
+        <span>Calendrier</span>
+
+    </button>
+
+
+    <button
+        class="nav-item"
+        onclick="showPage('tasksPage',this)">
+
+        <span class="nav-icon">☑</span>
+
+        <span>Tâches</span>
+
+    </button>
+
+
+    <button
+        class="nav-item"
+        onclick="showPage('statsPage',this)">
+
+        <span class="nav-icon">▥</span>
+
+        <span>Stats</span>
+
+    </button>
+
+
+    <button
+        class="nav-item"
+        onclick="showPage('profilePage',this)">
+
+        <span class="nav-icon">♙</span>
+
+        <span>Profil</span>
+
+    </button>
+
+</nav>
+
+
+<!-- =====================================================
+     MODAL AJOUT TACHE
+===================================================== -->
+
+<div
+    class="modal"
+    id="taskModal">
+
+    <div class="modal-box">
+
+        <h2 id="taskModalTitle">
+            Nouvelle tâche
+        </h2>
+
+
+        <div class="form-group">
+
+            <label>
+                Nom de la tâche
+            </label>
+
+            <input
+                id="newTaskName"
+                type="text"
+                placeholder="Ex : Préparer la présentation">
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>
+                Projet
+            </label>
+
+            <input
+                id="newTaskProject"
+                type="text"
+                placeholder="Ex : Projet étudiant">
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>
+                Date
+            </label>
+
+            <input
+                id="newTaskDate"
+                type="date">
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>
+                Priorité
+            </label>
+
+            <select id="newTaskPriority">
+
+                <option value="high">
+                    Haute
+                </option>
+
+                <option value="medium" selected>
+                    Moyenne
+                </option>
+
+                <option value="low">
+                    Basse
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <div class="modal-buttons">
+
+            <button
+                class="cancel-btn"
+                onclick="closeModal()">
+                Annuler
+            </button>
+
+            <button
+                class="save-btn"
+                onclick="saveTaskFromModal()">
+                <span id="taskModalSaveLabel">Ajouter</span>
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     TOAST
+===================================================== -->
+
+<div
+    class="toast"
+    id="toast">
+</div>
+
+
+<script>
+
+/* =========================================================
+   DONNEES
+========================================================= */
+
+let tasks = JSON.parse(
+    localStorage.getItem("maListeTasks")
+) || [
+
+    {
+        id: 1,
+        title: "Préparer la présentation",
+        project: "Projet étudiant",
+        date: "2026-04-25",
+        priority: "high",
+        status: "progress",
+        favorite: false
+    },
+
+    {
+        id: 2,
+        title: "Répondre aux e-mails",
+        project: "Travail",
+        date: "2026-04-26",
+        priority: "medium",
+        status: "progress",
+        favorite: false
+    },
+
+    {
+        id: 3,
+        title: "Faire les courses",
+        project: "Personnel",
+        date: "2026-04-24",
+        priority: "low",
+        status: "done",
+        favorite: true
+    },
+
+    {
+        id: 4,
+        title: "Appeler le designer",
+        project: "Projet mobile",
+        date: "2026-04-27",
+        priority: "medium",
+        status: "waiting",
+        favorite: false
+    },
+
+    {
+        id: 5,
+        title: "Réviser le cahier des charges",
+        project: "Projet client",
+        date: "2026-04-25",
+        priority: "high",
+        status: "progress",
+        favorite: false
+    }
+
+];
+
+
+let currentFilter = "all";
+
+
+let currentCalendarDate = new Date(
+    2026,
+    3,
+    1
+);
+
+
+let selectedDate = "2026-04-25";
+
+
+/* =========================================================
+   SAUVEGARDE
+========================================================= */
+
+function saveTasks() {
+
+    localStorage.setItem(
+        "maListeTasks",
+        JSON.stringify(tasks)
+    );
+
+}
+
+
+/* =========================================================
+   NAVIGATION
+========================================================= */
+
+function showPage(pageId, button) {
+
+    document
+        .querySelectorAll(".page")
+        .forEach(page => {
+            page.classList.remove("active");
+        });
+
+
+    document
+        .getElementById(pageId)
+        .classList.add("active");
+
+
+    document
+        .querySelectorAll(".nav-item")
+        .forEach(item => {
+            item.classList.remove("active");
+        });
+
+
+    button.classList.add("active");
+
+
+    if (pageId === "calendarPage") {
+        renderCalendar();
+        renderCalendarTasks();
+    }
+
+
+    if (pageId === "tasksPage") {
+        renderTasksPage();
+    }
+
+
+    if (pageId === "statsPage") {
+        updateStats();
+    }
+
+}
+
+
+/* =========================================================
+   FILTRE
+========================================================= */
+
+function setFilter(filter, button) {
+
+    currentFilter = filter;
+
+
+    document
+        .querySelectorAll(".filter")
+        .forEach(item => {
+            item.classList.remove("active");
+        });
+
+
+    button.classList.add("active");
+
+
+    renderHomeTasks();
+
+}
+
+
+/* =========================================================
+   AFFICHAGE DES TACHES
+========================================================= */
+
+function renderHomeTasks() {
+
+    const list =
+        document.getElementById("homeTaskList");
+
+
+    const empty =
+        document.getElementById("homeEmpty");
+
+
+    list.innerHTML = "";
+
+
+    let filtered = tasks;
+
+
+    if (currentFilter !== "all") {
+
+        filtered = tasks.filter(
+            task => task.status === currentFilter
+        );
+
+    }
+
+
+    if (filtered.length === 0) {
+
+        empty.style.display = "block";
+
+        return;
+
+    }
+
+
+    empty.style.display = "none";
+
+
+    filtered.forEach(task => {
+
+        list.appendChild(
+            createTaskElement(task)
+        );
+
+    });
+
+}
+
+
+/* =========================================================
+   ELEMENT TACHE
+========================================================= */
+
+function createTaskElement(task) {
+
+    const item =
+        document.createElement("div");
+
+
+    item.className = "task";
+
+
+    if (task.status === "done") {
+        item.classList.add("done");
+    }
+
+
+    let priorityText = "Moyenne";
+
+
+    if (task.priority === "high") {
+        priorityText = "Haute";
+    }
+
+
+    if (task.priority === "low") {
+        priorityText = "Basse";
+    }
+
+
+    item.innerHTML = `
+
+        <button
+            class="task-check"
+            onclick="toggleTask(${task.id})">
+        </button>
+
+
+        <div class="task-content">
+
+            <div class="task-title">
+                ${escapeHTML(task.title)}
+            </div>
+
+
+            <div class="task-info">
+
+                <span>
+                    📁 ${escapeHTML(task.project || "Personnel")}
+                </span>
+
+                <span>
+                    📅 ${formatDate(task.date)}
+                </span>
+
+                <span class="priority ${task.priority}">
+                    ⚑ ${priorityText}
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <div class="task-actions">
+        <button
+            class="edit-task"
+            title="Modifier"
+            aria-label="Modifier la tâche"
+            onclick="editTask(${task.id})">
+
+            ✎
+
+        </button>
+
+        <button
+            class="task-star ${task.favorite ? "favorite" : ""}"
+            onclick="toggleFavorite(${task.id})">
+
+            ${task.favorite ? "★" : "☆"}
+
+        </button>
+
+
+        <button
+            class="delete-task"
+            onclick="deleteTask(${task.id})">
+
+            🗑
+
+        </button>
+        </div>
+
+    `;
+
+
+    return item;
+
+}
+
+
+/* =========================================================
+   TOGGLE
+========================================================= */
+
+function toggleTask(id) {
+
+    const task =
+        tasks.find(task => task.id === id);
+
+
+    if (!task) {
+        return;
+    }
+
+
+    if (task.status === "done") {
+
+        task.status = "progress";
+
+    } else {
+
+        task.status = "done";
+
+    }
+
+
+    saveTasks();
+
+    renderAll();
+
+    showToast(
+        task.status === "done"
+        ? "Tâche terminée ✓"
+        : "Tâche remise en cours"
+    );
+
+}
+
+
+/* =========================================================
+   FAVORIS
+========================================================= */
+
+function toggleFavorite(id) {
+
+    const task =
+        tasks.find(task => task.id === id);
+
+
+    if (!task) {
+        return;
+    }
+
+
+    task.favorite = !task.favorite;
+
+
+    saveTasks();
+
+    renderAll();
+
+}
+
+
+/* =========================================================
+   SUPPRIMER
+========================================================= */
+
+function deleteTask(id) {
+
+    const confirmation =
+        confirm("Supprimer cette tâche ?");
+
+
+    if (!confirmation) {
+        return;
+    }
+
+
+    tasks =
+        tasks.filter(task => task.id !== id);
+
+
+    saveTasks();
+
+    renderAll();
+
+    showToast("Tâche supprimée");
+
+}
+
+
+/* =========================================================
+   CREER TACHE
+========================================================= */
+
+function createTask() {
+
+    const name =
+        document.getElementById("newTaskName").value.trim();
+
+
+    if (name === "") {
+
+        showToast(
+            "Veuillez entrer le nom de la tâche"
+        );
+
+        return;
+
+    }
+
+
+    const project =
+        document.getElementById("newTaskProject").value.trim()
+        || "Personnel";
+
+
+    const date =
+        document.getElementById("newTaskDate").value
+        || getTodayString();
+
+
+    const priority =
+        document.getElementById("newTaskPriority").value;
+
+
+    tasks.unshift({
+
+        id: Date.now(),
+
+        title: name,
+
+        project: project,
+
+        date: date,
+
+        priority: priority,
+
+        status: "progress",
+
+        favorite: false
+
+    });
+
+
+    saveTasks();
+
+
+    document.getElementById("newTaskName").value = "";
+
+    document.getElementById("newTaskProject").value = "";
+
+    document.getElementById("newTaskDate").value = "";
+
+
+    closeModal();
+
+    renderAll();
+
+    showToast("Tâche ajoutée ✓");
+
+}
+
+
+/* =========================================================
+   MODAL
+========================================================= */
+
+
+let editingTaskId = null;
+
+function saveTaskFromModal(){
+  if(editingTaskId !== null){
+    updateTask();
+  }else{
+    createTask();
+  }
+}
+
+function editTask(id){
+  const task = tasks.find(t => t.id === id);
+  if(!task) return;
+  editingTaskId = id;
+  document.getElementById("taskModalTitle").innerText = "Modifier la tâche";
+  document.getElementById("taskModalSaveLabel").innerText = "Enregistrer";
+  document.getElementById("newTaskName").value = task.title || "";
+  document.getElementById("newTaskProject").value = task.project || "";
+  document.getElementById("newTaskDate").value = task.date || "";
+  document.getElementById("newTaskPriority").value = task.priority || "medium";
+  document.getElementById("taskModal").classList.add("show");
+  setTimeout(() => document.getElementById("newTaskName").focus(), 100);
+}
+
+function updateTask(){
+  const task = tasks.find(t => t.id === editingTaskId);
+  if(!task) return;
+  const name = document.getElementById("newTaskName").value.trim();
+  if(!name){ showToast("Le nom de la tâche est obligatoire"); return; }
+  task.title = name;
+  task.project = document.getElementById("newTaskProject").value.trim() || "Personnel";
+  task.date = document.getElementById("newTaskDate").value || getTodayString();
+  task.priority = document.getElementById("newTaskPriority").value;
+  saveTasks();
+  editingTaskId = null;
+  resetTaskModal();
+  closeModal();
+  renderAll();
+  showToast("Tâche modifiée ✓");
+}
+
+function resetTaskModal(){
+  editingTaskId = null;
+  const title = document.getElementById("taskModalTitle");
+  const label = document.getElementById("taskModalSaveLabel");
+  if(title) title.innerText = "Nouvelle tâche";
+  if(label) label.innerText = "Ajouter";
+}
+
+function toggleProfileMenu(event){
+  event.stopPropagation();
+  document.getElementById("profileMenu").classList.toggle("show");
+}
+function closeProfileMenu(){
+  const menu = document.getElementById("profileMenu");
+  if(menu) menu.classList.remove("show");
+}
+document.addEventListener("click", function(event){
+  const wrap = document.querySelector(".profile-menu-wrap");
+  if(wrap && !wrap.contains(event.target)) closeProfileMenu();
+});
+
+function openModal() {
+    resetTaskModal();
+    document
+        .getElementById("taskModal")
+        .classList.add("show");
+
+
+    setTimeout(() => {
+
+        document
+            .getElementById("newTaskName")
+            .focus();
+
+    },100);
+
+}
+
+
+function closeModal() {
+    resetTaskModal();
+    document
+        .getElementById("taskModal")
+        .classList.remove("show");
+}
+
+
+/* =========================================================
+   TACHES PAGE
+========================================================= */
+
+function renderTasksPage() {
+
+    const list =
+        document.getElementById("allTaskList");
+
+
+    const search =
+        document
+            .getElementById("searchInput")
+            .value
+            .toLowerCase()
+            .trim();
+
+
+    list.innerHTML = "";
+
+
+    const filtered =
+        tasks.filter(task =>
+            task.title
+                .toLowerCase()
+                .includes(search)
+            ||
+            task.project
+                .toLowerCase()
+                .includes(search)
+        );
+
+
+    filtered.forEach(task => {
+
+        list.appendChild(
+            createTaskElement(task)
+        );
+
+    });
+
+}
+
+
+/* =========================================================
+   CALENDRIER
+========================================================= */
+
+function renderCalendar() {
+
+    const grid =
+        document.getElementById("calendarGrid");
+
+
+    const title =
+        document.getElementById("calendarTitle");
+
+
+    grid.innerHTML = "";
+
+
+    const year =
+        currentCalendarDate.getFullYear();
+
+
+    const month =
+        currentCalendarDate.getMonth();
+
+
+    const monthNames = [
+
+        "Janvier",
+        "Février",
+        "Mars",
+        "Avril",
+        "Mai",
+        "Juin",
+        "Juillet",
+        "Août",
+        "Septembre",
+        "Octobre",
+        "Novembre",
+        "Décembre"
+
+    ];
+
+
+    title.innerText =
+        `${monthNames[month]} ${year}`;
+
+
+    const firstDay =
+        new Date(year,month,1);
+
+
+    let startDay =
+        firstDay.getDay();
+
+
+    if (startDay === 0) {
+        startDay = 7;
+    }
+
+
+    const daysInMonth =
+        new Date(
+            year,
+            month + 1,
+            0
+        ).getDate();
+
+
+    const previousDays =
+        new Date(
+            year,
+            month,
+            0
+        ).getDate();
+
+
+    for (
+        let i = startDay - 1;
+        i > 0;
+        i--
+    ) {
+
+        const day =
+            document.createElement("div");
+
+
+        day.className =
+            "day other";
+
+
+        day.innerText =
+            previousDays - i + 1;
+
+
+        grid.appendChild(day);
+
+    }
+
+
+    for (
+        let dayNumber = 1;
+        dayNumber <= daysInMonth;
+        dayNumber++
+    ) {
+
+        const day =
+            document.createElement("div");
+
+
+        day.className = "day";
+
+
+        const dateString =
+            `${year}-${String(month + 1).padStart(2,"0")}-${String(dayNumber).padStart(2,"0")}`;
+
+
+        day.innerText =
+            dayNumber;
+
+
+        if (
+            dateString ===
+            getTodayString()
+        ) {
+
+            day.classList.add("today");
+
+        }
+
+
+        if (
+            tasks.some(
+                task =>
+                task.date === dateString
+            )
+        ) {
+
+            day.style.boxShadow =
+                "inset 0 -3px 0 #8b5cf6";
+
+        }
+
+
+        if (
+            dateString === selectedDate
+        ) {
+
+            day.style.outline =
+                "2px solid #22d3ee";
+
+        }
+
+
+        day.onclick = function() {
+
+            selectedDate =
+                dateString;
+
+            renderCalendar();
+
+            renderCalendarTasks();
+
+        };
+
+
+        grid.appendChild(day);
+
+    }
+
+}
+
+
+/* =========================================================
+   CHANGER MOIS
+========================================================= */
+
+function changeMonth(amount) {
+
+    currentCalendarDate.setMonth(
+        currentCalendarDate.getMonth() + amount
+    );
+
+
+    renderCalendar();
+
+}
+
+
+function goToday() {
+
+    const now = new Date();
+
+
+    currentCalendarDate =
+        new Date(
+            now.getFullYear(),
+            now.getMonth(),
+            1
+        );
+
+
+    selectedDate =
+        getTodayString();
+
+
+    renderCalendar();
+
+    renderCalendarTasks();
+
+}
+
+
+/* =========================================================
+   TACHES DU CALENDRIER
+========================================================= */
+
+function renderCalendarTasks() {
+
+    const list =
+        document.getElementById("calendarTaskList");
+
+
+    const selected =
+        document.getElementById("selectedDate");
+
+
+    list.innerHTML = "";
+
+
+    selected.innerText =
+        `Tâches du ${formatDateLong(selectedDate)}`;
+
+
+    const dayTasks =
+        tasks.filter(
+            task => task.date === selectedDate
+        );
+
+
+    if (dayTasks.length === 0) {
+
+        list.innerHTML = `
+
+            <div class="empty"
+                 style="display:block">
+
+                <div class="empty-icon">
+                    📅
+                </div>
+
+                Aucune tâche pour cette date.
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    dayTasks.forEach(task => {
+
+        list.appendChild(
+            createTaskElement(task)
+        );
+
+    });
+
+}
+
+
+/* =========================================================
+   STATISTIQUES
+========================================================= */
+
+function updateStats() {
+
+    const total =
+        tasks.length;
+
+
+    const done =
+        tasks.filter(
+            task => task.status === "done"
+        ).length;
+
+
+    const progress =
+        tasks.filter(
+            task => task.status === "progress"
+        ).length;
+
+
+    const waiting =
+        tasks.filter(
+            task => task.status === "waiting"
+        ).length;
+
+
+    document.getElementById("totalStat")
+        .innerText = total;
+
+
+    document.getElementById("doneStat")
+        .innerText = done;
+
+
+    document.getElementById("progressStat")
+        .innerText = progress;
+
+
+    document.getElementById("waitingStat")
+        .innerText = waiting;
+
+
+    const percentage =
+        total === 0
+        ? 0
+        : Math.round(
+            (done / total) * 100
+        );
+
+
+    document.getElementById("percentage")
+        .innerText = `${percentage}%`;
+
+}
+
+
+/* =========================================================
+   TOUT ACTUALISER
+========================================================= */
+
+function renderAll() {
+
+    renderHomeTasks();
+
+    renderTasksPage();
+
+    renderCalendar();
+
+    renderCalendarTasks();
+
+    updateStats();
+
+}
+
+
+/* =========================================================
+   DATE
+========================================================= */
+
+function getTodayString() {
+
+    const d = new Date();
+
+
+    return `${d.getFullYear()}-${String(
+        d.getMonth() + 1
+    ).padStart(2,"0")}-${String(
+        d.getDate()
+    ).padStart(2,"0")}`;
+
+}
+
+
+function formatDate(dateString) {
+
+    if (!dateString) {
+        return "Sans date";
+    }
+
+
+    const parts =
+        dateString.split("-");
+
+
+    return `${parts[2]}/${parts[1]}/${parts[0]}`;
+
+}
+
+
+function formatDateLong(dateString) {
+
+    const date =
+        new Date(dateString + "T00:00:00");
+
+
+    return date.toLocaleDateString(
+        "fr-FR",
+        {
+            day: "numeric",
+            month: "long",
+            year: "numeric"
+        }
+    );
+
+}
+
+
+/* =========================================================
+   SECURITE HTML
+========================================================= */
+
+function escapeHTML(text) {
+
+    const div =
+        document.createElement("div");
+
+
+    div.textContent =
+        text;
+
+
+    return div.innerHTML;
+
+}
+
+
+/* =========================================================
+   TOAST
+========================================================= */
+
+function showToast(message) {
+
+    const toast =
+        document.getElementById("toast");
+
+
+    toast.innerText =
+        message;
+
+
+    toast.classList.add("show");
+
+
+    setTimeout(() => {
+
+        toast.classList.remove("show");
+
+    },2500);
+
+}
+
+
+/* =========================================================
+   INITIALISATION
+========================================================= */
+
+renderAll();
+
+
+/* Fermer le modal en cliquant à l'extérieur */
+
+document
+    .getElementById("taskModal")
+    .addEventListener(
+        "click",
+        function(event) {
+
+            if (
+                event.target === this
+            ) {
+
+                closeModal();
+
+            }
+
+        }
+    );
+
+
+/* Touche Echap */
+
+document.addEventListener(
+    "keydown",
+    function(event) {
+
+        if (event.key === "Escape") {
+            closeModal();
+        }
+
+    }
+);
+
+
+// ---------------- Profil fonctionnel ----------------
+let profile = JSON.parse(localStorage.getItem("maListeProfile")) || {
+  name:"Ladji Fofana", email:"ladji.f@gmail.com", photo:"",
+  dark:true, compact:false, notifications:true, reminders:true
+};
+
+function saveProfile(){
+  localStorage.setItem("maListeProfile", JSON.stringify(profile));
+  updateProfileUI();
+}
+function updateProfileUI(){
+  document.getElementById("mainProfileName").innerText = profile.name || "Utilisateur";
+  document.getElementById("mainProfileEmail").innerText = profile.email || "";
+  const av = document.getElementById("mainAvatar");
+  if(profile.photo) av.innerHTML = `<img src="${profile.photo}" alt="Photo de profil">`;
+  else av.innerText = "👤";
+  document.getElementById("notificationSubtitle").innerText =
+    profile.notifications ? "Notifications activées" : "Notifications désactivées";
+}
+function openProfileModal(type){
+  const modal=document.getElementById("profileModal"), box=document.getElementById("profileModalBox");
+  if(type==="account"){
+    box.innerHTML=`
+      <h2>Mon compte</h2>
+      <div class="avatar-upload">
+        <div class="avatar-preview" id="avatarPreview">${profile.photo?`<img src="${profile.photo}">`:"👤"}</div>
+        <div>
+          <input id="profilePhoto" type="file" accept="image/*" style="display:none" onchange="previewProfilePhoto(event)">
+          <button class="small-btn" onclick="document.getElementById('profilePhoto').click()">Choisir une photo</button>
+          <button class="small-btn" onclick="removeProfilePhoto()">Supprimer</button>
+        </div>
+      </div>
+      <br>
+      <div class="form-group"><label>Nom</label><input id="profileNameInput" value="${escapeHTML(profile.name)}"></div>
+      <div class="form-group"><label>E-mail</label><input id="profileEmailInput" type="email" value="${escapeHTML(profile.email)}"></div>
+      <div class="modal-buttons"><button class="cancel-btn" onclick="closeProfileModal()">Annuler</button><button class="save-btn" onclick="saveAccount()">Enregistrer</button></div>`;
+  } else if(type==="preferences"){
+    box.innerHTML=`
+      <h2>Préférences</h2>
+      <div class="profile-option"><div><div class="profile-option-title">Mode sombre</div><div class="profile-option-subtitle">Conserver l'apparence sombre</div></div>
+      <label class="switch"><input id="darkModeToggle" type="checkbox" ${profile.dark?"checked":""} onchange="toggleDarkMode(this.checked)"><span class="slider"></span></label></div>
+      <div class="profile-option"><div><div class="profile-option-title">Affichage compact</div><div class="profile-option-subtitle">Réduire l'espace entre les tâches</div></div>
+      <label class="switch"><input id="compactToggle" type="checkbox" ${profile.compact?"checked":""} onchange="toggleCompact(this.checked)"><span class="slider"></span></label></div>
+      <div class="info-box">Les préférences sont enregistrées directement sur cet appareil et restent disponibles hors connexion.</div>
+      <div class="modal-buttons"><button class="save-btn" onclick="closeProfileModal()">Fermer</button></div>`;
+  } else if(type==="notifications"){
+    box.innerHTML=`
+      <h2>Notifications</h2>
+      <div class="profile-option"><div><div class="profile-option-title">Notifications</div><div class="profile-option-subtitle">Activer les rappels dans l'application</div></div>
+      <label class="switch"><input id="notifToggle" type="checkbox" ${profile.notifications?"checked":""} onchange="toggleNotifications(this.checked)"><span class="slider"></span></label></div>
+      <div class="profile-option"><div><div class="profile-option-title">Rappels de tâches</div><div class="profile-option-subtitle">Afficher les tâches arrivant à échéance</div></div>
+      <label class="switch"><input id="reminderToggle" type="checkbox" ${profile.reminders?"checked":""} onchange="toggleReminders(this.checked)"><span class="slider"></span></label></div>
+      <div class="info-box">Les réglages sont mémorisés hors connexion. Les notifications système dépendent des autorisations de votre téléphone.</div>
+      <div class="modal-buttons"><button class="save-btn" onclick="closeProfileModal()">Fermer</button></div>`;
+  } else if(type==="backup"){
+    box.innerHTML=`
+      <h2>Sauvegarde</h2>
+      <div class="info-box">Vos tâches et votre profil sont actuellement enregistrés sur cet appareil.</div><br>
+      <button class="small-btn" style="width:100%;margin-bottom:10px" onclick="exportBackup()">⬇ Exporter une sauvegarde</button>
+      <button class="small-btn" style="width:100%;margin-bottom:10px" onclick="document.getElementById('backupFile').click()">⬆ Importer une sauvegarde</button>
+      <input id="backupFile" type="file" accept=".json,application/json" style="display:none" onchange="importBackup(event)">
+      <button class="danger-btn" onclick="clearAllData()">Supprimer toutes les données</button>
+      <div class="modal-buttons"><button class="save-btn" onclick="closeProfileModal()">Fermer</button></div>`;
+  } else {
+    box.innerHTML=`
+      <h2>À propos</h2>
+      <div class="info-box"><strong>Ma Liste</strong><br>Version 1.1<br><br>Application de gestion de tâches conçue pour fonctionner avec stockage local et mode hors connexion.<br><br>Vos données restent sur votre appareil sauf si vous choisissez de les exporter.</div>
+      <div class="modal-buttons"><button class="save-btn" onclick="closeProfileModal()">Fermer</button></div>`;
+  }
+  modal.classList.add("show");
+}
+function closeProfileModal(){document.getElementById("profileModal").classList.remove("show")}
+function previewProfilePhoto(event){
+  const file=event.target.files[0]; if(!file)return;
+  if(file.size>2*1024*1024){showToast("Photo trop grande (max 2 Mo)");return}
+  const reader=new FileReader();
+  reader.onload=e=>{
+    profile.photo=e.target.result;
+    document.getElementById("avatarPreview").innerHTML=`<img src="${profile.photo}">`;
+  };
+  reader.readAsDataURL(file);
+}
+function removeProfilePhoto(){profile.photo="";document.getElementById("avatarPreview").innerText="👤"}
+function saveAccount(){
+  const name=document.getElementById("profileNameInput").value.trim();
+  const email=document.getElementById("profileEmailInput").value.trim();
+  if(!name){showToast("Le nom est obligatoire");return}
+  profile.name=name; profile.email=email; saveProfile(); closeProfileModal(); showToast("Profil enregistré ✓");
+}
+function toggleDarkMode(value){profile.dark=value;saveProfile();showToast(value?"Mode sombre activé":"Mode sombre conservé")}
+function toggleCompact(value){
+  profile.compact=value;saveProfile();
+  document.body.classList.toggle("compact-mode",value);
+}
+function toggleNotifications(value){profile.notifications=value;saveProfile();showToast(value?"Notifications activées":"Notifications désactivées")}
+function toggleReminders(value){profile.reminders=value;saveProfile()}
+function exportBackup(){
+  const backup={version:"1.1",exportedAt:new Date().toISOString(),tasks:tasks,profile:profile};
+  const blob=new Blob([JSON.stringify(backup,null,2)],{type:"application/json"});
+  const url=URL.createObjectURL(blob),a=document.createElement("a");
+  a.href=url;a.download="ma-liste-sauvegarde.json";a.click();URL.revokeObjectURL(url);
+  showToast("Sauvegarde exportée ✓");
+}
+function importBackup(event){
+  const file=event.target.files[0];if(!file)return;
+  const reader=new FileReader();
+  reader.onload=e=>{
+    try{
+      const data=JSON.parse(e.target.result);
+      if(!Array.isArray(data.tasks))throw new Error();
+      tasks=data.tasks;
+      if(data.profile) profile={...profile,...data.profile};
+      saveTasks();saveProfile();renderAll();closeProfileModal();showToast("Sauvegarde importée ✓");
+    }catch(err){showToast("Fichier de sauvegarde invalide")}
+  };
+  reader.readAsText(file);
+}
+function clearAllData(){
+  if(!confirm("Supprimer toutes les tâches et les données du profil ?"))return;
+  tasks=[]; profile={name:"Utilisateur",email:"",photo:"",dark:true,compact:false,notifications:true,reminders:true};
+  saveTasks();saveProfile();renderAll();closeProfileModal();showToast("Toutes les données ont été supprimées");
+}
+document.getElementById("profileModal").addEventListener("click",e=>{if(e.target.id==="profileModal")closeProfileModal()});
+updateProfileUI();
+
+</script>
+
+<div class="modal" id="profileModal">
+  <div class="modal-box" id="profileModalBox"></div>
+</div>
+</body>
+</html>
