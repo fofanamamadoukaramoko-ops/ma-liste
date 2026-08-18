@@ -1791,7 +1791,23 @@ body {
 
 
         <div class="form-group">
+            <label>Heure du rappel</label>
+            <input id="newTaskTime" type="time">
+        </div>
 
+        <div class="form-group">
+            <label>Rappel</label>
+            <select id="newTaskReminder">
+                <option value="none">Aucun rappel</option>
+                <option value="at_time">À l'heure choisie</option>
+                <option value="5">5 minutes avant</option>
+                <option value="15">15 minutes avant</option>
+                <option value="30">30 minutes avant</option>
+                <option value="60">1 heure avant</option>
+            </select>
+        </div>
+
+        <div class="form-group">
             <label>
                 Priorité
             </label>
@@ -1861,6 +1877,8 @@ let tasks = JSON.parse(
         title: "Préparer la présentation",
         project: "Projet étudiant",
         date: "2026-04-25",
+        time: "",
+        reminder: "none",
         priority: "high",
         status: "progress",
         favorite: false
@@ -1871,6 +1889,8 @@ let tasks = JSON.parse(
         title: "Répondre aux e-mails",
         project: "Travail",
         date: "2026-04-26",
+        time: "",
+        reminder: "none",
         priority: "medium",
         status: "progress",
         favorite: false
@@ -1881,6 +1901,8 @@ let tasks = JSON.parse(
         title: "Faire les courses",
         project: "Personnel",
         date: "2026-04-24",
+        time: "",
+        reminder: "none",
         priority: "low",
         status: "done",
         favorite: true
@@ -1891,6 +1913,8 @@ let tasks = JSON.parse(
         title: "Appeler le designer",
         project: "Projet mobile",
         date: "2026-04-27",
+        time: "",
+        reminder: "none",
         priority: "medium",
         status: "waiting",
         favorite: false
@@ -1901,6 +1925,8 @@ let tasks = JSON.parse(
         title: "Réviser le cahier des charges",
         project: "Projet client",
         date: "2026-04-25",
+        time: "",
+        reminder: "none",
         priority: "high",
         status: "progress",
         favorite: false
@@ -2113,6 +2139,8 @@ function createTaskElement(task) {
                 <span>
                     📅 ${formatDate(task.date)}
                 </span>
+                ${task.time ? `<span>⏰ ${escapeHTML(task.time)}</span>` : ""}
+                ${task.reminder && task.reminder !== "none" ? `<span>🔔 Rappel</span>` : ""}
 
                 <span class="priority ${task.priority}">
                     ⚑ ${priorityText}
@@ -2314,7 +2342,8 @@ function createTask() {
     document.getElementById("newTaskProject").value = "";
 
     document.getElementById("newTaskDate").value = "";
-
+    document.getElementById("newTaskTime").value = "";
+    document.getElementById("newTaskReminder").value = "none";
 
     closeModal();
 
@@ -2349,6 +2378,8 @@ function editTask(id){
   document.getElementById("newTaskName").value = task.title || "";
   document.getElementById("newTaskProject").value = task.project || "";
   document.getElementById("newTaskDate").value = task.date || "";
+  document.getElementById("newTaskTime").value = task.time || "";
+  document.getElementById("newTaskReminder").value = task.reminder || "none";
   document.getElementById("newTaskPriority").value = task.priority || "medium";
   document.getElementById("taskModal").classList.add("show");
   setTimeout(() => document.getElementById("newTaskName").focus(), 100);
@@ -2909,6 +2940,67 @@ function showToast(message) {
 
 
 /* =========================================================
+   NOTIFICATIONS ET RAPPELS
+========================================================= */
+
+let notifiedTasks = JSON.parse(localStorage.getItem("maListeNotifiedTasks") || "{}");
+
+async function requestNotificationPermission(){
+  if (!("Notification" in window)) {
+    showToast("Les notifications ne sont pas prises en charge ici");
+    return false;
+  }
+  if (Notification.permission === "granted") return true;
+  if (Notification.permission === "denied") {
+    showToast("Les notifications sont bloquées dans les réglages du navigateur");
+    return false;
+  }
+  const permission = await Notification.requestPermission();
+  if (permission === "granted") {
+    showToast("Notifications autorisées ✓");
+    return true;
+  }
+  return false;
+}
+
+function reminderDate(task){
+  if (!task.date || !task.time || !task.reminder || task.reminder === "none") return null;
+  const base = new Date(`${task.date}T${task.time}`);
+  if (Number.isNaN(base.getTime())) return null;
+  if (task.reminder === "at_time") return base;
+  return new Date(base.getTime() - Number(task.reminder) * 60000);
+}
+
+function checkTaskReminders(){
+  if (!profile || !profile.notifications || !profile.reminders) return;
+  if (!("Notification" in window) || Notification.permission !== "granted") return;
+  const now = Date.now();
+  let changed = false;
+  tasks.forEach(task => {
+    if (task.status === "done") return;
+    const when = reminderDate(task);
+    if (!when) return;
+    const key = `${task.id}-${task.date}-${task.time}-${task.reminder}`;
+    if (notifiedTasks[key]) return;
+    if (Math.abs(now - when.getTime()) <= 60000 || now >= when.getTime()) {
+      new Notification("Ma Liste 🔔", {
+        body: `N'oubliez pas : ${task.title}`,
+        icon: "icons/icon-192.png",
+        tag: `ma-liste-${task.id}`
+      });
+      notifiedTasks[key] = Date.now();
+      changed = true;
+    }
+  });
+  if (changed) localStorage.setItem("maListeNotifiedTasks", JSON.stringify(notifiedTasks));
+}
+
+function startReminderEngine(){
+  checkTaskReminders();
+  setInterval(checkTaskReminders, 30000);
+}
+
+/* =========================================================
    INITIALISATION
 ========================================================= */
 
@@ -3043,7 +3135,18 @@ function toggleCompact(value){
   profile.compact=value;saveProfile();
   document.body.classList.toggle("compact-mode",value);
 }
-function toggleNotifications(value){profile.notifications=value;saveProfile();showToast(value?"Notifications activées":"Notifications désactivées")}
+async function toggleNotifications(value){
+  if(value){
+    const ok = await requestNotificationPermission();
+    profile.notifications = ok;
+    saveProfile();
+    if(ok) checkTaskReminders();
+  }else{
+    profile.notifications=false;
+    saveProfile();
+    showToast("Notifications désactivées");
+  }
+}
 function toggleReminders(value){profile.reminders=value;saveProfile()}
 function exportBackup(){
   const backup={version:"1.1",exportedAt:new Date().toISOString(),tasks:tasks,profile:profile};
@@ -3073,6 +3176,7 @@ function clearAllData(){
 }
 document.getElementById("profileModal").addEventListener("click",e=>{if(e.target.id==="profileModal")closeProfileModal()});
 updateProfileUI();
+startReminderEngine();
 
 </script>
 
