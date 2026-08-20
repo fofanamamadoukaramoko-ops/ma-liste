@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#080d19">
 <meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
    <link rel="manifest" href="manifest.json">
    <link rel="apple-touch-icon" href="icons/icon-192.png">
 
@@ -1108,6 +1109,21 @@ body {
 .task-actions{display:flex;align-items:center;gap:4px}
 .edit-task{border:0;background:transparent;color:#8ea0bb;font-size:16px;cursor:pointer;padding:7px;border-radius:8px}
 .edit-task:hover{background:#1b2940;color:#fff}
+
+/* =========================================================
+   INSTALLATION + CRÉATEUR
+========================================================= */
+.install-card{background:linear-gradient(135deg,#121d34,#0e1627);border:1px solid #2b3b5a;border-radius:14px;padding:15px;margin-top:14px}
+.install-card h3{font-size:16px;margin-bottom:7px}
+.install-card p{color:#9aa8bf;font-size:13px;line-height:1.5;margin-bottom:10px}
+.install-platform{background:#0b1322;border:1px solid #263650;border-radius:12px;padding:12px;margin-top:9px}
+.install-platform strong{display:block;margin-bottom:6px;font-size:14px}
+.install-platform ol{margin:0 0 0 20px;color:#c5cede;font-size:13px;line-height:1.65}
+.creator-box{margin-top:12px;text-align:center;padding:13px;border-radius:12px;background:#0d1729;border:1px solid #263650}
+.creator-box strong{font-size:15px}
+.creator-box small{display:block;color:#8994a8;margin-top:5px}
+.install-main-btn{width:100%;margin-top:10px}
+
 </style>
 </head>
 
@@ -1624,6 +1640,7 @@ body {
 <button onclick="openProfileModal('preferences');closeProfileMenu()">⚙ Préférences</button>
 <button onclick="openProfileModal('notifications');closeProfileMenu()">🔔 Notifications</button>
 <button onclick="openProfileModal('backup');closeProfileMenu()">☁ Sauvegarde</button>
+<button onclick="openInstallModal();closeProfileMenu()">📲 Installer Ma Liste</button>
 <button onclick="openProfileModal('about');closeProfileMenu()">ⓘ À propos</button>
 </div>
 </div>
@@ -3108,6 +3125,11 @@ function openProfileModal(type){
     box.innerHTML=`
       <h2>À propos</h2>
       <div class="info-box"><strong>Ma Liste</strong><br>Version 1.1<br><br>Application de gestion de tâches conçue pour fonctionner avec stockage local et mode hors connexion.<br><br>Vos données restent sur votre appareil sauf si vous choisissez de les exporter.</div>
+      <div class="creator-box">
+        <strong>👨‍💻 Créé et développé par Mamadou K. Fofana</strong>
+        <small>Conception · Développement · 2026</small>
+      </div>
+      <button class="save-btn install-main-btn" onclick="closeProfileModal();openInstallModal()">📲 Comment installer Ma Liste ?</button>
       <div class="modal-buttons"><button class="save-btn" onclick="closeProfileModal()">Fermer</button></div>`;
   }
   modal.classList.add("show");
@@ -3178,7 +3200,95 @@ document.getElementById("profileModal").addEventListener("click",e=>{if(e.target
 updateProfileUI();
 startReminderEngine();
 
+
+// =========================================================
+// INSTALLATION PWA
+// =========================================================
+let deferredInstallPrompt = null;
+
+window.addEventListener("beforeinstallprompt", (event) => {
+  event.preventDefault();
+  deferredInstallPrompt = event;
+  const btn = document.getElementById("nativeInstallBtn");
+  if (btn) btn.style.display = "block";
+});
+
+window.addEventListener("appinstalled", () => {
+  deferredInstallPrompt = null;
+  const btn = document.getElementById("nativeInstallBtn");
+  if (btn) btn.style.display = "none";
+  showToast("Ma Liste est installée ✓");
+});
+
+function openInstallModal(){
+  const modal = document.getElementById("installModal");
+  if (!modal) return;
+  const btn = document.getElementById("nativeInstallBtn");
+  if (btn) btn.style.display = deferredInstallPrompt ? "block" : "none";
+  modal.classList.add("show");
+}
+
+function closeInstallModal(){
+  const modal = document.getElementById("installModal");
+  if (modal) modal.classList.remove("show");
+}
+
+async function installApp(){
+  if (!deferredInstallPrompt){
+    showToast("Suivez les étapes affichées pour installer Ma Liste");
+    return;
+  }
+  deferredInstallPrompt.prompt();
+  const result = await deferredInstallPrompt.userChoice;
+  deferredInstallPrompt = null;
+  const btn = document.getElementById("nativeInstallBtn");
+  if (btn) btn.style.display = "none";
+  if (result.outcome === "accepted") {
+    closeInstallModal();
+    showToast("Installation lancée ✓");
+  }
+}
+
+document.getElementById("installModal").addEventListener("click", function(event){
+  if(event.target === this) closeInstallModal();
+});
+
 </script>
+
+<div class="modal" id="installModal">
+  <div class="modal-box">
+    <h2>📲 Installer Ma Liste</h2>
+    <div class="install-card">
+      <h3>🍎 iPhone / iPad</h3>
+      <p>Sur iPhone, l'installation se fait depuis <strong>Safari</strong>.</p>
+      <div class="install-platform">
+        <ol>
+          <li>Ouvre Ma Liste avec <strong>Safari</strong>.</li>
+          <li>Appuie sur le bouton <strong>Partager</strong> (□↑).</li>
+          <li>Choisis <strong>Sur l'écran d'accueil</strong>.</li>
+          <li>Appuie sur <strong>Ajouter</strong>.</li>
+        </ol>
+      </div>
+    </div>
+    <div class="install-card">
+      <h3>🤖 Android</h3>
+      <p>Sur Android, ouvre Ma Liste avec <strong>Chrome</strong>.</p>
+      <div class="install-platform">
+        <ol>
+          <li>Ouvre Ma Liste avec <strong>Chrome</strong>.</li>
+          <li>Appuie sur le menu <strong>⋮</strong>.</li>
+          <li>Choisis <strong>Installer l'application</strong> ou <strong>Ajouter à l'écran d'accueil</strong>.</li>
+          <li>Confirme avec <strong>Ajouter</strong> ou <strong>Installer</strong>.</li>
+        </ol>
+      </div>
+    </div>
+    <div class="info-box" style="margin-top:12px">💡 Une fois installée, <strong>Ma Liste</strong> apparaît comme une application sur l'écran d'accueil et peut fonctionner hors connexion.</div>
+    <div class="modal-buttons">
+      <button class="cancel-btn" onclick="closeInstallModal()">Fermer</button>
+      <button class="save-btn" id="nativeInstallBtn" onclick="installApp()" style="display:none">📲 Installer maintenant</button>
+    </div>
+  </div>
+</div>
 
 <div class="modal" id="profileModal">
   <div class="modal-box" id="profileModalBox"></div>
