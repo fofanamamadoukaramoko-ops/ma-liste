@@ -1125,6 +1125,55 @@ body {
 .install-main-btn{width:100%;margin-top:10px}
 
 </style>
+
+<style id="install-guide-mobile-fix">
+#installGuideModal{
+  box-sizing:border-box !important;
+  padding:12px !important;
+}
+#installGuideModal > div{
+  box-sizing:border-box !important;
+  width:min(560px, 100%) !important;
+  max-height:calc(100vh - 24px) !important;
+  overflow-y:auto !important;
+  padding:clamp(14px,4vw,22px) !important;
+}
+#installGuideModal h2{
+  font-size:clamp(20px,5vw,28px) !important;
+  line-height:1.2 !important;
+}
+#installGuideModal h3{
+  font-size:clamp(16px,4.5vw,20px) !important;
+}
+#installGuideModal ol{
+  box-sizing:border-box !important;
+  margin:0 !important;
+  padding-left:24px !important;
+  overflow-wrap:anywhere !important;
+  word-break:normal !important;
+}
+#installGuideModal li{
+  margin-bottom:7px !important;
+  line-height:1.5 !important;
+  overflow-wrap:anywhere !important;
+}
+#installGuideModal b{
+  overflow-wrap:anywhere !important;
+}
+@media (max-width:480px){
+  #installGuideModal{
+    padding:8px !important;
+  }
+  #installGuideModal > div{
+    border-radius:16px !important;
+    max-height:calc(100vh - 16px) !important;
+  }
+  #installGuideModal > div > div:first-child{
+    align-items:flex-start !important;
+  }
+}
+</style>
+
 </head>
 
 
