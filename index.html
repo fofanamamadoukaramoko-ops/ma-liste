@@ -1174,6 +1174,26 @@ body {
 }
 </style>
 
+
+<style id="guide-page-style">
+.guide-page{padding-bottom:30px}
+.guide-hero{background:linear-gradient(135deg,#171f3d,#101827);border:1px solid #2b3952;border-radius:18px;padding:20px;margin-bottom:16px}
+.guide-hero h2{margin:0 0 8px;font-size:24px}
+.guide-hero p{margin:0;color:#aeb8c9;line-height:1.6}
+.guide-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.guide-card{background:#111a2b;border:1px solid #263650;border-radius:16px;padding:16px}
+.guide-card .guide-icon{font-size:28px;margin-bottom:8px}
+.guide-card h3{margin:0 0 7px;font-size:17px}
+.guide-card p{margin:0;color:#aeb8c9;font-size:13px;line-height:1.6}
+.guide-steps{margin:10px 0 0;padding-left:21px;color:#cbd5e1;font-size:13px;line-height:1.7}
+.guide-tip{margin-top:14px;background:rgba(99,102,241,.12);border:1px solid rgba(99,102,241,.35);border-radius:14px;padding:14px;color:#dbe4ff;line-height:1.6;font-size:13px}
+.guide-back{width:100%;margin-bottom:12px}
+@media(max-width:600px){
+  .guide-grid{grid-template-columns:1fr}
+  .guide-hero{padding:16px}
+}
+</style>
+
 </head>
 
 
@@ -1717,10 +1737,119 @@ body {
 <div class="profile-option-left"><span>☁</span><div><div class="profile-option-title">Sauvegarde</div><div class="profile-option-subtitle">Exporter ou importer vos tâches</div></div></div><span class="arrow">›</span>
 </div>
 
+
+<div class="profile-option" onclick="showPage('guidePage',document.querySelector('.nav-item:last-child'))">
+<div class="profile-option-left"><span>📘</span><div><div class="profile-option-title">Comment utiliser Ma Liste ?</div><div class="profile-option-subtitle">Découvrir toutes les fonctions de l'application</div></div></div><span class="arrow">›</span>
+</div>
+
 <div class="profile-option" onclick="openProfileModal('about')">
 <div class="profile-option-left"><span>ⓘ</span><div><div class="profile-option-title">À propos</div><div class="profile-option-subtitle">Ma Liste v1.1</div></div></div><span class="arrow">›</span>
 </div>
 </div>
+</section>
+
+
+<!-- =====================================================
+     GUIDE D'UTILISATION
+===================================================== -->
+<section class="page guide-page" id="guidePage">
+  <div class="section-header">
+    <h3>Guide de Ma Liste</h3>
+  </div>
+
+  <button class="save-btn guide-back" onclick="showPage('profilePage',document.querySelector('.nav-item:last-child'))">
+    ← Retour au profil
+  </button>
+
+  <div class="guide-hero">
+    <h2>📘 Bienvenue sur Ma Liste</h2>
+    <p>Voici comment utiliser l'application pour organiser tes tâches, planifier ta journée et suivre ta progression.</p>
+  </div>
+
+  <div class="guide-grid">
+    <div class="guide-card">
+      <div class="guide-icon">📝</div>
+      <h3>Créer une tâche</h3>
+      <p>Ajoute rapidement ce que tu dois faire et donne-lui les informations nécessaires.</p>
+      <ol class="guide-steps">
+        <li>Appuie sur le bouton <b>+</b>.</li>
+        <li>Écris le nom de la tâche.</li>
+        <li>Ajoute une date ou une priorité si nécessaire.</li>
+        <li>Enregistre.</li>
+      </ol>
+    </div>
+
+    <div class="guide-card">
+      <div class="guide-icon">☑️</div>
+      <h3>Terminer une tâche</h3>
+      <p>Quand une tâche est terminée, marque-la comme faite pour suivre ton avancement.</p>
+      <ol class="guide-steps">
+        <li>Ouvre la liste des tâches.</li>
+        <li>Appuie sur la case de la tâche.</li>
+        <li>La tâche passe en terminée.</li>
+      </ol>
+    </div>
+
+    <div class="guide-card">
+      <div class="guide-icon">📅</div>
+      <h3>Utiliser le calendrier</h3>
+      <p>Le calendrier permet de retrouver tes tâches en fonction de leur date.</p>
+      <ol class="guide-steps">
+        <li>Ouvre <b>Calendrier</b>.</li>
+        <li>Choisis une date.</li>
+        <li>Consulte les tâches prévues.</li>
+      </ol>
+    </div>
+
+    <div class="guide-card">
+      <div class="guide-icon">📊</div>
+      <h3>Suivre tes statistiques</h3>
+      <p>La section <b>Stats</b> t'aide à voir ton activité et ta progression.</p>
+    </div>
+
+    <div class="guide-card">
+      <div class="guide-icon">🔔</div>
+      <h3>Gérer les rappels</h3>
+      <p>Dans <b>Profil → Notifications</b>, tu peux gérer les notifications et les rappels de tâches.</p>
+    </div>
+
+    <div class="guide-card">
+      <div class="guide-icon">💾</div>
+      <h3>Sauvegarder tes données</h3>
+      <p>Dans <b>Profil → Sauvegarde</b>, tu peux exporter une sauvegarde ou importer une sauvegarde existante.</p>
+    </div>
+
+    <div class="guide-card">
+      <div class="guide-icon">👤</div>
+      <h3>Personnaliser ton profil</h3>
+      <p>Dans <b>Mon compte</b>, modifie ton nom, ton e-mail et ta photo de profil.</p>
+    </div>
+
+    <div class="guide-card">
+      <div class="guide-icon">⚙️</div>
+      <h3>Personnaliser l'application</h3>
+      <p>Dans <b>Préférences</b>, tu peux gérer l'apparence et l'affichage de l'application.</p>
+    </div>
+
+    <div class="guide-card">
+      <div class="guide-icon">📱</div>
+      <h3>Installer Ma Liste</h3>
+      <p>Ajoute Ma Liste à ton écran d'accueil pour l'utiliser comme une application.</p>
+      <div style="margin-top:10px">
+        <button class="small-btn" style="width:100%" onclick="openInstallGuide()">📲 Voir les instructions d'installation</button>
+      </div>
+    </div>
+
+    <div class="guide-card">
+      <div class="guide-icon">📴</div>
+      <h3>Utiliser hors connexion</h3>
+      <p>Ma Liste utilise le stockage local de l'appareil pour conserver tes données et permettre l'utilisation hors connexion.</p>
+    </div>
+  </div>
+
+  <div class="guide-tip">
+    💡 <b>Conseil :</b> commence par créer quelques tâches, attribue-leur des dates, puis utilise Calendrier et Stats pour suivre ton organisation.
+  </div>
 </section>
 
 
