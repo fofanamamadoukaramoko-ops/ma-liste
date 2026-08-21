@@ -1194,6 +1194,69 @@ body {
 }
 </style>
 
+
+<style id="light-theme-style">
+:root.light-mode{
+  --bg:#f4f7fb !important;
+  --card-bg:#ffffff !important;
+  --text-color:#172033 !important;
+  --muted:#64748b !important;
+  --border:#dbe3ef !important;
+}
+body.light-mode{
+  background:#f4f7fb !important;
+  color:#172033 !important;
+}
+body.light-mode .app,
+body.light-mode .page,
+body.light-mode .modal-content,
+body.light-mode .profile-card,
+body.light-mode .profile-option,
+body.light-mode .guide-card,
+body.light-mode .guide-hero{
+  background:#ffffff !important;
+  color:#172033 !important;
+  border-color:#dbe3ef !important;
+}
+body.light-mode .guide-hero{
+  background:linear-gradient(135deg,#eef2ff,#ffffff) !important;
+}
+body.light-mode .profile-option-subtitle,
+body.light-mode .guide-hero p,
+body.light-mode .guide-card p,
+body.light-mode .guide-steps{
+  color:#64748b !important;
+}
+body.light-mode input,
+body.light-mode textarea,
+body.light-mode select{
+  background:#f8fafc !important;
+  color:#172033 !important;
+  border-color:#dbe3ef !important;
+}
+body.light-mode .bottom-nav{
+  background:rgba(255,255,255,.95) !important;
+  border-color:#dbe3ef !important;
+}
+body.light-mode .modal-overlay{
+  background:rgba(15,23,42,.45) !important;
+}
+.theme-choice{
+  display:flex;gap:10px;margin-top:10px;
+}
+.theme-choice button{
+  flex:1;padding:12px;border:1px solid #334155;border-radius:12px;
+  background:#111a2b;color:#fff;font-weight:700;cursor:pointer;
+}
+body.light-mode .theme-choice button{
+  background:#f8fafc;color:#172033;border-color:#dbe3ef;
+}
+.theme-choice button.active{
+  border-color:#6366f1 !important;
+  box-shadow:0 0 0 2px rgba(99,102,241,.18);
+}
+</style>
+
 </head>
 
 
@@ -3505,5 +3568,25 @@ document.getElementById("installModal").addEventListener("click", function(event
 <button onclick="closeInstallHelp()" style="width:100%;padding:14px;border:0;border-radius:12px">J’ai compris</button>
 </div></div>
 <script>function openInstallHelp(){document.getElementById('installHelp').style.display='block'} function closeInstallHelp(){document.getElementById('installHelp').style.display='none'}</script>
+
+<script id="theme-switcher">
+(function(){
+  const saved = localStorage.getItem("maListeTheme");
+  function applyTheme(theme){
+    const light = theme === "light";
+    document.body.classList.toggle("light-mode", light);
+    document.documentElement.classList.toggle("light-mode", light);
+    localStorage.setItem("maListeTheme", light ? "light" : "dark");
+    document.querySelectorAll("[data-theme-choice]").forEach(b=>{
+      b.classList.toggle("active", b.dataset.themeChoice === theme);
+    });
+  }
+  window.setMaListeTheme = applyTheme;
+  document.addEventListener("DOMContentLoaded", ()=>{
+    applyTheme(saved || "dark");
+  });
+})();
+</script>
+
 </body>
 </html>
