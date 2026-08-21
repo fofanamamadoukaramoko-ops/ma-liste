@@ -1187,7 +1187,7 @@ body {
 .guide-card p{margin:0;color:#aeb8c9;font-size:13px;line-height:1.6}
 .guide-steps{margin:10px 0 0;padding-left:21px;color:#cbd5e1;font-size:13px;line-height:1.7}
 .guide-tip{margin-top:14px;background:rgba(99,102,241,.12);border:1px solid rgba(99,102,241,.35);border-radius:14px;padding:14px;color:#dbe4ff;line-height:1.6;font-size:13px}
-.guide-back{width:100%;margin-bottom:12px}
+
 @media(max-width:600px){
   .guide-grid{grid-template-columns:1fr}
   .guide-hero{padding:16px}
@@ -2421,137 +2421,37 @@ body:not(.light-mode) #profileModal .preference-theme-buttons button *{
 </style>
 
 
-<style id="guide-back-bottom-and-creator-dark-final">
-/* =========================================================
-   GUIDE : bouton « Retour au profil » en bas
-   ========================================================= */
-#guidePage{
-  position:relative !important;
-  min-height:calc(100vh - 150px) !important;
-  padding-bottom:90px !important;
+
+
+
+
+
+
+<style id="guide-back-final">
+.guide-back{
+  width:100%;
+  margin-top:20px;
+  padding:14px 18px;
+  border:1px solid #334155;
+  border-radius:14px;
+  background:#172033;
+  color:#fff;
+  font-size:15px;
+  font-weight:700;
+  cursor:pointer;
 }
-
-
-/* Le bouton reste visuellement en bas du contenu du guide */
-
-/* =========================================================
-   PROFIL : créateur sur UNE SEULE LIGNE en mode sombre
-   ========================================================= */
-body:not(.light-mode) #profileModal .creator-box{
-  display:flex !important;
-  align-items:center !important;
-  justify-content:center !important;
-  width:100% !important;
-  box-sizing:border-box !important;
-  padding:10px 12px !important;
-  min-height:42px !important;
-  overflow:hidden !important;
-}
-
-body:not(.light-mode) #profileModal .creator-box strong{
-  display:block !important;
-  color:#ffffff !important;
-  font-size:13px !important;
-  font-weight:800 !important;
-  line-height:1.2 !important;
-  white-space:nowrap !important;
-  text-align:center !important;
-  margin:0 !important;
-}
-
-body:not(.light-mode) #profileModal .creator-box small{
-  display:none !important;
-}
-
-/* Sécurité : aucun élément interne ne force un retour à la ligne */
-body:not(.light-mode) #profileModal .creator-box strong *{
-  white-space:nowrap !important;
-}
-
-/* Version petits écrans */
-@media(max-width:480px){
-  body:not(.light-mode) #profileModal .creator-box{
-    padding:9px 8px !important;
-  }
-
-  body:not(.light-mode) #profileModal .creator-box strong{
-    font-size:12px !important;
-  }
+.guide-back:hover{filter:brightness(1.08);}
+body.light-mode .guide-back{
+  background:#ffffff;
+  color:#172033;
+  border-color:#cbd5e1;
 }
 </style>
 
-
-<style id="final-guide-position-fix">
-/* =========================================================
-   CORRECTION DÉFINITIVE — GUIDE DE MA LISTE
-   Le bouton Retour au profil est réellement placé APRÈS
-   tout le contenu du guide, donc visuellement en bas.
-   ========================================================= */
-
-#guidePage{
-  display:flex !important;
-  flex-direction:column !important;
-  min-height:calc(100vh - 145px) !important;
-  box-sizing:border-box !important;
-  padding-bottom:105px !important;
-}
-
-/* Ordre réel des éléments du guide */
-#guidePage > .section-header{order:1 !important;}
-#guidePage > .guide-hero{order:2 !important;}
-#guidePage > .guide-grid{order:3 !important;}
-#guidePage > .guide-tip{order:4 !important;}
-
-/* Retour au profil = DERNIER élément */
-
-/* =========================================================
-   CRÉATEUR — MODE SOMBRE : UNE SEULE LIGNE
-   ========================================================= */
-
-body:not(.light-mode) #profileModal .creator-box{
-  width:100% !important;
-  display:flex !important;
-  align-items:center !important;
-  justify-content:center !important;
-  box-sizing:border-box !important;
-  overflow:hidden !important;
-  white-space:nowrap !important;
-}
-
-body:not(.light-mode) #profileModal .creator-box strong{
-  display:block !important;
-  width:auto !important;
-  max-width:100% !important;
-  margin:0 !important;
-  padding:0 !important;
-  color:#fff !important;
-  -webkit-text-fill-color:#fff !important;
-  font-weight:800 !important;
-  font-size:13px !important;
-  line-height:1.2 !important;
-  white-space:nowrap !important;
-  text-align:center !important;
-}
-
-body:not(.light-mode) #profileModal .creator-box small{
-  display:none !important;
-}
-
-@media(max-width:480px){
-  #guidePage{
-    padding-bottom:100px !important;
-  }
-
-  #guidePage > .guide-back{
-    margin-top:20px !important;
-  }
-
-  body:not(.light-mode) #profileModal .creator-box strong{
-    font-size:11.5px !important;
-  }
-}
+<style id="guide-nav-only-profile">
+.guide-nav-item{display:none !important}
+.profile-show-guide .guide-nav-item{display:flex !important}
 </style>
-
 </head>
 
 
@@ -3095,6 +2995,10 @@ body:not(.light-mode) #profileModal .creator-box small{
 <div class="profile-option-left"><span>☁</span><div><div class="profile-option-title">Sauvegarde</div><div class="profile-option-subtitle">Exporter ou importer vos tâches</div></div></div><span class="arrow">›</span>
 </div>
 
+<div class="profile-option" onclick="openGuidePage()">
+<div class="profile-option-left"><span>📘</span><div><div class="profile-option-title">Guide de Ma Liste</div><div class="profile-option-subtitle">Découvrir comment utiliser l'application</div></div></div><span class="arrow">›</span>
+</div>
+
 <div class="profile-option" onclick="openProfileModal('about')">
 <div class="profile-option-left"><span>ⓘ</span><div><div class="profile-option-title">À propos</div><div class="profile-option-subtitle">Ma Liste v1.1</div></div></div><span class="arrow">›</span>
 </div>
@@ -3199,6 +3103,13 @@ body:not(.light-mode) #profileModal .creator-box small{
   <div class="guide-tip">
     💡 <b>Conseil :</b> commence par créer quelques tâches, attribue-leur des dates, puis utilise Calendrier et Stats pour suivre ton organisation.
   </div>
+
+  <button
+    class="guide-back"
+    onclick="returnToProfile()">
+    ← Retour au profil
+  </button>
+
 </section>
 
 
@@ -3253,6 +3164,17 @@ body:not(.light-mode) #profileModal .creator-box small{
         <span>Tâches</span>
 
     </button>
+    <button
+        class="nav-item guide-nav-item"
+        onclick="openGuidePage(this)">
+
+        <span class="nav-icon">📘</span>
+
+        <span>Guide</span>
+
+    </button>
+
+
 
 
     <button
@@ -3511,6 +3433,41 @@ function saveTasks() {
    NAVIGATION
 ========================================================= */
 
+function openGuidePage(button){
+    document.querySelectorAll(".page").forEach(page => {
+        page.classList.remove("active");
+    });
+
+    const guide = document.getElementById("guidePage");
+    if (guide) guide.classList.add("active");
+
+    document.querySelectorAll(".nav-item").forEach(item => {
+        item.classList.remove("active");
+    });
+
+    if (button) button.classList.add("active");
+
+    document.body.classList.add("profile-show-guide");
+
+    window.scrollTo({top: 0, behavior: "smooth"});
+}
+
+function returnToProfile(){
+    const profileButton = Array.from(document.querySelectorAll(".nav-item"))
+        .find(item => item.textContent.includes("Profil"));
+
+    if (profileButton) {
+        showPage("profilePage", profileButton);
+    } else {
+        document.querySelectorAll(".page").forEach(page => page.classList.remove("active"));
+        const profile = document.getElementById("profilePage");
+        if (profile) profile.classList.add("active");
+        document.querySelectorAll(".nav-item").forEach(item => item.classList.remove("active"));
+    }
+
+    window.scrollTo({top: 0, behavior: "smooth"});
+}
+
 function showPage(pageId, button) {
 
     document
@@ -3533,6 +3490,9 @@ function showPage(pageId, button) {
 
 
     button.classList.add("active");
+
+    // Le bouton Guide est visible uniquement depuis Profil.
+    document.body.classList.toggle("profile-show-guide", pageId === "profilePage");
 
 
     if (pageId === "calendarPage") {
