@@ -1257,6 +1257,81 @@ body.light-mode .theme-choice button{
 }
 </style>
 
+
+<style id="ma-liste-light-theme">
+body.light-mode{
+  background:#f4f7fb !important;
+  color:#172033 !important;
+}
+body.light-mode .app,
+body.light-mode .page,
+body.light-mode .card,
+body.light-mode .stat-card,
+body.light-mode .task-card,
+body.light-mode .profile-option,
+body.light-mode .profile-card,
+body.light-mode .modal-content,
+body.light-mode .guide-card,
+body.light-mode .guide-hero{
+  background:#fff !important;
+  color:#172033 !important;
+  border-color:#dbe3ef !important;
+}
+body.light-mode .topbar,
+body.light-mode .bottom-nav{
+  background:#fff !important;
+  border-color:#dbe3ef !important;
+}
+body.light-mode p,
+body.light-mode .muted,
+body.light-mode .profile-option-subtitle,
+body.light-mode .guide-card p,
+body.light-mode .guide-hero p{
+  color:#64748b !important;
+}
+body.light-mode input,
+body.light-mode textarea,
+body.light-mode select{
+  background:#f8fafc !important;
+  color:#172033 !important;
+  border-color:#dbe3ef !important;
+}
+body.light-mode .theme-panel{
+  background:#f8fafc !important;
+  border-color:#dbe3ef !important;
+}
+.theme-panel{
+  margin-top:10px;
+  padding:12px;
+  border-radius:14px;
+  background:#111a2b;
+  border:1px solid #263650;
+}
+.theme-buttons{
+  display:flex;
+  gap:8px;
+}
+.theme-buttons button{
+  flex:1;
+  padding:11px 8px;
+  border:1px solid #334155;
+  border-radius:11px;
+  background:#18243a;
+  color:#fff;
+  font-weight:700;
+  cursor:pointer;
+}
+body.light-mode .theme-buttons button{
+  background:#fff;
+  color:#172033;
+  border-color:#dbe3ef;
+}
+.theme-buttons button.selected{
+  border-color:#6366f1 !important;
+  box-shadow:0 0 0 2px rgba(99,102,241,.18);
+}
+</style>
+
 </head>
 
 
@@ -1800,6 +1875,23 @@ body.light-mode .theme-choice button{
 <div class="profile-option-left"><span>☁</span><div><div class="profile-option-title">Sauvegarde</div><div class="profile-option-subtitle">Exporter ou importer vos tâches</div></div></div><span class="arrow">›</span>
 </div>
 
+
+
+<div class="profile-option" id="maListeAppearance">
+  <div class="profile-option-left">
+    <span>🎨</span>
+    <div style="width:100%">
+      <div class="profile-option-title">Apparence</div>
+      <div class="profile-option-subtitle">Choisis le thème de Ma Liste</div>
+      <div class="theme-panel">
+        <div class="theme-buttons">
+          <button type="button" id="themeDarkBtn" onclick="setMaListeTheme('dark')">🌙 Sombre</button>
+          <button type="button" id="themeLightBtn" onclick="setMaListeTheme('light')">☀️ Clair</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
 <div class="profile-option" onclick="showPage('guidePage',document.querySelector('.nav-item:last-child'))">
 <div class="profile-option-left"><span>📘</span><div><div class="profile-option-title">Comment utiliser Ma Liste ?</div><div class="profile-option-subtitle">Découvrir toutes les fonctions de l'application</div></div></div><span class="arrow">›</span>
@@ -3584,6 +3676,26 @@ document.getElementById("installModal").addEventListener("click", function(event
   window.setMaListeTheme = applyTheme;
   document.addEventListener("DOMContentLoaded", ()=>{
     applyTheme(saved || "dark");
+  });
+})();
+</script>
+
+
+<script id="ma-liste-theme-js">
+function setMaListeTheme(theme){
+  const light = theme === "light";
+  document.body.classList.toggle("light-mode", light);
+  localStorage.setItem("maListeTheme", light ? "light" : "dark");
+  const d=document.getElementById("themeDarkBtn");
+  const l=document.getElementById("themeLightBtn");
+  if(d) d.classList.toggle("selected", !light);
+  if(l) l.classList.toggle("selected", light);
+  showToast(light ? "☀️ Mode clair activé" : "🌙 Mode sombre activé");
+}
+(function(){
+  const theme=localStorage.getItem("maListeTheme") || "dark";
+  document.addEventListener("DOMContentLoaded",function(){
+    setMaListeTheme(theme);
   });
 })();
 </script>
