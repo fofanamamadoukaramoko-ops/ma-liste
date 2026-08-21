@@ -1429,6 +1429,272 @@ body.light-mode .guide-card li{
 }
 </style>
 
+
+<style id="light-mode-final-contrast-fix">
+/* =========================================================
+   MA LISTE — MODE CLAIR : CONTRASTE FINAL
+   Le mode sombre n'est pas modifié.
+   ========================================================= */
+
+body.light-mode {
+  background: #f1f5f9 !important;
+  color: #111827 !important;
+}
+
+/* Barre du haut */
+body.light-mode .topbar {
+  background: #ffffff !important;
+  border-bottom-color: #d7dee9 !important;
+}
+body.light-mode .brand h1,
+body.light-mode .welcome h2,
+body.light-mode .section-header h3,
+body.light-mode .calendar-header h2,
+body.light-mode .analytics-card h3,
+body.light-mode .profile-name,
+body.light-mode .profile-option-title,
+body.light-mode .stat-number {
+  color: #111827 !important;
+}
+body.light-mode .brand p,
+body.light-mode .welcome p,
+body.light-mode .stat-label,
+body.light-mode .task-info,
+body.light-mode .profile-email,
+body.light-mode .profile-option-subtitle,
+body.light-mode .bar-label,
+body.light-mode .weekdays div,
+body.light-mode .empty,
+body.light-mode .donut-text span {
+  color: #475569 !important;
+}
+
+/* Boutons/icônes */
+body.light-mode .icon-btn {
+  background: #ffffff !important;
+  color: #111827 !important;
+  border-color: #cbd5e1 !important;
+}
+body.light-mode .icon-btn:hover {
+  background: #f1f5f9 !important;
+}
+body.light-mode .section-header button {
+  color: #4f46e5 !important;
+}
+
+/* Hero : on conserve son fond coloré et son texte blanc */
+body.light-mode .hero {
+  background:
+    radial-gradient(circle at 90% 40%, rgba(34,211,238,.3), transparent 25%),
+    linear-gradient(120deg,#2728c9,#692ce8 55%,#1c72dc) !important;
+  color: #ffffff !important;
+}
+body.light-mode .hero h2,
+body.light-mode .hero p,
+body.light-mode .hero * {
+  color: #ffffff !important;
+}
+body.light-mode .hero p {
+  color: rgba(255,255,255,.88) !important;
+}
+
+/* Statistiques */
+body.light-mode .stat-card,
+body.light-mode .analytics-card {
+  background: #ffffff !important;
+  border-color: #d7dee9 !important;
+}
+
+/* Filtres */
+body.light-mode .filter {
+  background: #ffffff !important;
+  color: #334155 !important;
+  border-color: #cbd5e1 !important;
+}
+body.light-mode .filter.active {
+  background: linear-gradient(135deg,#5843ec,#793ce9) !important;
+  color: #ffffff !important;
+  border-color: transparent !important;
+}
+
+/* Tâches */
+body.light-mode .task {
+  background: #ffffff !important;
+  color: #111827 !important;
+  border-color: #d7dee9 !important;
+}
+body.light-mode .task-title {
+  color: #111827 !important;
+}
+body.light-mode .task.done .task-title {
+  color: #64748b !important;
+}
+body.light-mode .task-info {
+  color: #475569 !important;
+}
+body.light-mode .task-star,
+body.light-mode .delete-task,
+body.light-mode .edit-task {
+  color: #475569 !important;
+}
+body.light-mode .task-star.favorite {
+  color: #d97706 !important;
+}
+
+/* Recherche et champs */
+body.light-mode .search-box {
+  background: #ffffff !important;
+  border-color: #cbd5e1 !important;
+}
+body.light-mode .search-box input,
+body.light-mode .form-group input,
+body.light-mode .form-group select,
+body.light-mode input,
+body.light-mode textarea,
+body.light-mode select {
+  color: #111827 !important;
+  background: #ffffff !important;
+  border-color: #cbd5e1 !important;
+}
+body.light-mode .search-box input::placeholder,
+body.light-mode input::placeholder,
+body.light-mode textarea::placeholder {
+  color: #64748b !important;
+  opacity: 1 !important;
+}
+body.light-mode .form-group label {
+  color: #334155 !important;
+}
+
+/* Calendrier */
+body.light-mode .calendar-card {
+  background: #ffffff !important;
+  border-color: #d7dee9 !important;
+}
+body.light-mode .calendar-buttons button {
+  background: #ffffff !important;
+  color: #111827 !important;
+  border-color: #cbd5e1 !important;
+}
+body.light-mode .day {
+  color: #1e293b !important;
+}
+body.light-mode .day.other {
+  color: #94a3b8 !important;
+}
+body.light-mode .day:hover {
+  background: #e2e8f0 !important;
+}
+body.light-mode .day.today {
+  color: #ffffff !important;
+}
+body.light-mode .selected-date {
+  background: #f8fafc !important;
+  color: #334155 !important;
+  border: 1px solid #e2e8f0 !important;
+}
+
+/* Graphiques */
+body.light-mode .donut::after {
+  background: #ffffff !important;
+}
+body.light-mode .bar-label {
+  color: #475569 !important;
+}
+
+/* Profil */
+body.light-mode .profile-card,
+body.light-mode .profile-option {
+  background: #ffffff !important;
+  color: #111827 !important;
+  border-color: #d7dee9 !important;
+}
+body.light-mode .profile-option:hover {
+  background: #f8fafc !important;
+}
+body.light-mode .profile-option .arrow {
+  color: #64748b !important;
+}
+body.light-mode .preference-theme-box {
+  background: #f8fafc !important;
+  border-color: #d7dee9 !important;
+}
+body.light-mode .preference-theme-buttons button,
+body.light-mode .small-btn {
+  background: #ffffff !important;
+  color: #111827 !important;
+  border-color: #cbd5e1 !important;
+}
+
+/* Menus et modales */
+body.light-mode .profile-menu,
+body.light-mode .modal-box {
+  background: #ffffff !important;
+  color: #111827 !important;
+  border-color: #d7dee9 !important;
+}
+body.light-mode .profile-menu button {
+  color: #111827 !important;
+}
+body.light-mode .profile-menu button:hover {
+  background: #f1f5f9 !important;
+}
+
+/* Guide */
+body.light-mode .guide-card,
+body.light-mode .guide-hero {
+  color: #111827 !important;
+  border-color: #d7dee9 !important;
+}
+body.light-mode .guide-card {
+  background: #ffffff !important;
+}
+body.light-mode .guide-hero {
+  background: linear-gradient(135deg,#eef2ff,#ffffff) !important;
+}
+body.light-mode .guide-card h3,
+body.light-mode .guide-hero h2 {
+  color: #111827 !important;
+}
+body.light-mode .guide-card p,
+body.light-mode .guide-card li,
+body.light-mode .guide-hero p {
+  color: #475569 !important;
+}
+
+/* Navigation du bas */
+body.light-mode .bottom-nav {
+  background: rgba(255,255,255,.98) !important;
+  border-top-color: #d7dee9 !important;
+}
+body.light-mode .nav-item {
+  color: #475569 !important;
+}
+body.light-mode .nav-item.active,
+body.light-mode .nav-item.active .nav-icon {
+  color: #4f46e5 !important;
+}
+
+/* Zone d'information */
+body.light-mode .info-box {
+  background: #f8fafc !important;
+  color: #334155 !important;
+  border-color: #d7dee9 !important;
+}
+
+/* Toast */
+body.light-mode .toast {
+  background: #111827 !important;
+  color: #ffffff !important;
+  border-color: #334155 !important;
+}
+
+/* Les textes génériques dans les cartes restent lisibles */
+body.light-mode .page {
+  color: #111827 !important;
+}
+</style>
+
 </head>
 
 
