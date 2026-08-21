@@ -1695,6 +1695,629 @@ body.light-mode .page {
 }
 </style>
 
+
+
+<style id="profile-light-mode-complete-fix">
+/* =========================================================
+   MA LISTE — PROFIL : CORRECTION COMPLÈTE DU MODE CLAIR
+   Le mode sombre reste inchangé.
+   ========================================================= */
+
+body.light-mode #profileModal .modal-box {
+  background: #ffffff !important;
+  color: #172033 !important;
+  border: 1px solid #d7dee9 !important;
+  box-shadow: 0 25px 70px rgba(15,23,42,.18) !important;
+}
+
+body.light-mode #profileModal .modal-box h2 {
+  color: #111827 !important;
+  font-weight: 800 !important;
+}
+
+body.light-mode #profileModal .form-group label {
+  color: #1f2937 !important;
+  font-weight: 700 !important;
+}
+
+body.light-mode #profileModal .form-group input,
+body.light-mode #profileModal .form-group select,
+body.light-mode #profileModal input {
+  background: #ffffff !important;
+  color: #111827 !important;
+  border-color: #cbd5e1 !important;
+}
+
+body.light-mode #profileModal .form-group input::placeholder,
+body.light-mode #profileModal input::placeholder {
+  color: #64748b !important;
+  opacity: 1 !important;
+}
+
+body.light-mode #profileModal .form-group input:focus,
+body.light-mode #profileModal input:focus,
+body.light-mode #profileModal select:focus {
+  border-color: #6366f1 !important;
+  box-shadow: 0 0 0 3px rgba(99,102,241,.12) !important;
+}
+
+/* Blocs d'options : compte, préférences, notifications, rappels */
+body.light-mode #profileModal .profile-option {
+  background: #f8fafc !important;
+  color: #172033 !important;
+  border-color: #d7dee9 !important;
+}
+
+body.light-mode #profileModal .profile-option:hover {
+  background: #f1f5f9 !important;
+}
+
+body.light-mode #profileModal .profile-option-title {
+  color: #111827 !important;
+  font-weight: 750 !important;
+}
+
+body.light-mode #profileModal .profile-option-subtitle {
+  color: #475569 !important;
+  font-weight: 500 !important;
+}
+
+/* Mode d'affichage */
+body.light-mode #profileModal .preference-theme-box {
+  background: #f8fafc !important;
+  color: #172033 !important;
+  border-color: #d7dee9 !important;
+}
+
+body.light-mode #profileModal .preference-theme-box .profile-option-title {
+  color: #111827 !important;
+}
+
+body.light-mode #profileModal .preference-theme-box .profile-option-subtitle {
+  color: #475569 !important;
+}
+
+body.light-mode #profileModal .preference-theme-buttons button {
+  background: #ffffff !important;
+  color: #172033 !important;
+  border-color: #cbd5e1 !important;
+  font-weight: 700 !important;
+}
+
+body.light-mode #profileModal .preference-theme-buttons button.active {
+  color: #ffffff !important;
+}
+
+/* Encadrés d'information */
+body.light-mode #profileModal .info-box {
+  background: #f1f5f9 !important;
+  color: #334155 !important;
+  border-color: #d7dee9 !important;
+}
+
+body.light-mode #profileModal .info-box strong {
+  color: #111827 !important;
+  font-weight: 800 !important;
+}
+
+/* Photo de profil */
+body.light-mode #profileModal .avatar-preview {
+  background: #eef2f7 !important;
+  color: #172033 !important;
+  border-color: #cbd5e1 !important;
+}
+
+/* Boutons */
+body.light-mode #profileModal .small-btn {
+  background: #ffffff !important;
+  color: #172033 !important;
+  border-color: #cbd5e1 !important;
+  font-weight: 700 !important;
+}
+
+body.light-mode #profileModal .small-btn:hover {
+  background: #f1f5f9 !important;
+}
+
+body.light-mode #profileModal .save-btn,
+body.light-mode #profileModal .install-main-btn {
+  color: #ffffff !important;
+  font-weight: 750 !important;
+}
+
+body.light-mode #profileModal .cancel-btn {
+  background: #f1f5f9 !important;
+  color: #172033 !important;
+  border-color: #cbd5e1 !important;
+  font-weight: 700 !important;
+}
+
+body.light-mode #profileModal .danger-btn {
+  color: #ffffff !important;
+  font-weight: 750 !important;
+}
+
+/* Interrupteurs */
+body.light-mode #profileModal .switch {
+  color: #172033 !important;
+}
+
+/* Créateur : blanc, gras, une seule ligne */
+body.light-mode #profileModal .creator-box {
+  background: #111827 !important;
+  color: #ffffff !important;
+  border: 1px solid #263247 !important;
+  border-radius: 12px !important;
+}
+
+body.light-mode #profileModal .creator-box strong {
+  display: block !important;
+  color: #ffffff !important;
+  font-size: 14px !important;
+  font-weight: 800 !important;
+  line-height: 1.25 !important;
+  white-space: nowrap !important;
+}
+
+body.light-mode #profileModal .creator-box small {
+  display: block !important;
+  color: #dbe3ef !important;
+  font-size: 11px !important;
+  font-weight: 500 !important;
+  margin-top: 4px !important;
+}
+
+/* Boutons du bas */
+body.light-mode #profileModal .modal-buttons button {
+  font-weight: 700 !important;
+}
+
+/* Empêche les règles générales du mode clair de rendre le créateur sombre */
+body.light-mode #profileModal .creator-box,
+body.light-mode #profileModal .creator-box * {
+  color: #ffffff !important;
+}
+
+body.light-mode #profileModal .creator-box small {
+  color: #dbe3ef !important;
+}
+
+@media (max-width: 480px) {
+  body.light-mode #profileModal .creator-box strong {
+    font-size: 13px !important;
+  }
+}
+</style>
+
+
+<style id="profile-light-final-fix">
+/* ===== PROFIL : MODE CLAIR FINAL ===== */
+body.light-mode .profile-modal .modal-box,
+body.light-mode #profileModal .modal-box,
+body.light-mode .profile-modal-content {
+  background:#ffffff !important; color:#172033 !important;
+  border:1px solid #dbe3ef !important;
+}
+body.light-mode #profileModal h2,
+body.light-mode #profileModal h3,
+body.light-mode #profileModal strong,
+body.light-mode #profileModal label,
+body.light-mode #profileModal .profile-option-title {
+  color:#111827 !important;
+}
+body.light-mode #profileModal .info-box,
+body.light-mode #profileModal .creator-box {
+  background:#f8fafc !important;
+  color:#172033 !important;
+  border-color:#dbe3ef !important;
+}
+body.light-mode #profileModal .creator-box strong {
+  color:#ffffff !important;
+  background:#172033 !important;
+  display:block;
+  width:max-content;
+  max-width:100%;
+  padding:5px 9px;
+  border-radius:8px;
+  font-size:12px;
+  font-weight:800;
+  line-height:1.2;
+  white-space:nowrap;
+}
+body.light-mode #profileModal .creator-box small {
+  color:#64748b !important;
+}
+@media(max-width:500px){
+  body.light-mode #profileModal .creator-box strong{font-size:11px;padding:4px 7px;}
+}
+</style>
+
+
+<style id="final-light-mode-visibility-fix">
+/* ===== CORRECTION FINALE : LISIBILITE DU MODE CLAIR ===== */
+body.light-mode .tip-box,
+body.light-mode .info-box,
+body.light-mode .install-card,
+body.light-mode .install-platform {
+  color:#172033 !important;
+  background:#ffffff !important;
+  border-color:#dbe3ef !important;
+}
+body.light-mode .tip-box *,
+body.light-mode .info-box *,
+body.light-mode .install-card *,
+body.light-mode .install-platform * {
+  color:#172033 !important;
+}
+body.light-mode .install-card h3,
+body.light-mode .install-card strong,
+body.light-mode .install-platform strong,
+body.light-mode .info-box strong {
+  color:#111827 !important;
+  font-weight:700 !important;
+}
+body.light-mode .install-main-btn,
+body.light-mode .save-btn.install-main-btn {
+  color:#ffffff !important;
+  background:#6366f1 !important;
+  border-color:#6366f1 !important;
+}
+body.light-mode .preference-theme-buttons button {
+  color:#172033 !important;
+  background:#ffffff !important;
+  border-color:#cbd5e1 !important;
+}
+body.light-mode .preference-theme-buttons button.active {
+  color:#ffffff !important;
+  background:#6366f1 !important;
+  border-color:#6366f1 !important;
+}
+/* Fenêtre d'installation */
+body.light-mode #installModal .modal-box {
+  background:#ffffff !important;
+  color:#172033 !important;
+  border-color:#dbe3ef !important;
+}
+body.light-mode #installModal .modal-box h2,
+body.light-mode #installModal .modal-box h3,
+body.light-mode #installModal .modal-box p,
+body.light-mode #installModal .modal-box li,
+body.light-mode #installModal .modal-box span,
+body.light-mode #installModal .modal-box strong {
+  color:#172033 !important;
+}
+body.light-mode #installModal .modal-box h2,
+body.light-mode #installModal .modal-box h3 {
+  color:#111827 !important;
+  font-weight:800 !important;
+}
+body.light-mode #installModal .install-platform {
+  background:#f8fafc !important;
+}
+body.light-mode #installHelp > div {
+  background:#ffffff !important;
+  color:#172033 !important;
+  border:1px solid #dbe3ef;
+}
+body.light-mode #installHelp h2,
+body.light-mode #installHelp h3,
+body.light-mode #installHelp p,
+body.light-mode #installHelp li,
+body.light-mode #installHelp b {
+  color:#172033 !important;
+}
+body.light-mode #installHelp h2,
+body.light-mode #installHelp h3 {
+  color:#111827 !important;
+  font-weight:800 !important;
+}
+body.light-mode #installHelp button {
+  color:#172033 !important;
+}
+body.light-mode #installHelp > div > div {
+  background:#f1f5f9 !important;
+  border:1px solid #dbe3ef;
+}
+body.light-mode #installHelp > div > div h3,
+body.light-mode #installHelp > div > div li,
+body.light-mode #installHelp > div > div b {
+  color:#172033 !important;
+}
+/* Conseil de la page d'accueil */
+body.light-mode .welcome,
+body.light-mode .welcome *,
+body.light-mode .tip,
+body.light-mode .tip *,
+body.light-mode .advice,
+body.light-mode .advice * {
+  color:#172033 !important;
+}
+body.light-mode .welcome strong,
+body.light-mode .tip strong,
+body.light-mode .advice strong {
+  color:#111827 !important;
+}
+</style>
+
+
+<style id="final-light-readability-fix">
+/* ===== CORRECTION FINALE MODE CLAIR ===== */
+body.light-mode .modal-box,
+body.light-mode .modal-box h2,
+body.light-mode .modal-box h3,
+body.light-mode .modal-box p,
+body.light-mode .modal-box li,
+body.light-mode .modal-box strong,
+body.light-mode .modal-box span { color:#172033 !important; }
+
+body.light-mode .install-card {
+  background:#ffffff !important;
+  color:#172033 !important;
+  border:1px solid #dbe3ef !important;
+}
+body.light-mode .install-card h3,
+body.light-mode .install-card p,
+body.light-mode .install-card li,
+body.light-mode .install-card strong { color:#172033 !important; }
+body.light-mode .install-platform {
+  background:#f8fafc !important;
+  color:#172033 !important;
+  border:1px solid #e2e8f0 !important;
+}
+body.light-mode .install-platform * { color:#172033 !important; }
+
+body.light-mode .info-box {
+  background:#f8fafc !important;
+  color:#172033 !important;
+  border:1px solid #dbe3ef !important;
+}
+body.light-mode .info-box * { color:#172033 !important; }
+
+body.light-mode .save-btn.install-main-btn,
+body.light-mode #nativeInstallBtn {
+  background:#6366f1 !important;
+  color:#ffffff !important;
+  border-color:#6366f1 !important;
+  font-weight:700 !important;
+}
+
+body.light-mode #installHelp > div {
+  background:#ffffff !important;
+  color:#172033 !important;
+}
+body.light-mode #installHelp h2,
+body.light-mode #installHelp h3,
+body.light-mode #installHelp p,
+body.light-mode #installHelp li,
+body.light-mode #installHelp b { color:#172033 !important; }
+body.light-mode #installHelp > div > div {
+  background:#eef2ff !important;
+  color:#172033 !important;
+}
+body.light-mode #installHelp button {
+  color:#172033 !important;
+  background:#f1f5f9 !important;
+}
+body.light-mode #installHelp button[onclick="closeInstallHelp()"] {
+  background:#6366f1 !important;
+  color:#ffffff !important;
+}
+
+/* Conseil de la page d'accueil */
+body.light-mode .tip,
+body.light-mode .tip-box,
+body.light-mode .welcome-tip,
+body.light-mode .advice,
+body.light-mode [class*="conseil"] {
+  color:#172033 !important;
+}
+body.light-mode .tip *,
+body.light-mode .tip-box *,
+body.light-mode .welcome-tip *,
+body.light-mode .advice *,
+body.light-mode [class*="conseil"] * {
+  color:#172033 !important;
+}
+</style>
+
+<style id="MODE-CLAIR-LISIBILITE-DEFINITIVE">
+/* =========================================================
+   MA LISTE — CORRECTION DÉFINITIVE DU MODE CLAIR
+   Ces règles ne s'appliquent QUE lorsque body.light-mode est actif.
+   ========================================================= */
+
+/* 💡 CONSEIL */
+body.light-mode .guide-tip,
+body.light-mode .guide-tip * {
+  color:#172033 !important;
+  opacity:1 !important;
+  text-shadow:none !important;
+}
+body.light-mode .guide-tip {
+  background:#eef2ff !important;
+  border:1px solid #c7d2fe !important;
+}
+body.light-mode .guide-tip b,
+body.light-mode .guide-tip strong {
+  color:#111827 !important;
+  font-weight:800 !important;
+}
+
+/* 📲 FENÊTRE D'INSTALLATION DYNAMIQUE */
+body.light-mode #installGuideModal,
+body.light-mode #installGuideModal > div {
+  color:#172033 !important;
+}
+body.light-mode #installGuideModal > div {
+  background:#ffffff !important;
+  border-color:#dbe3ef !important;
+}
+body.light-mode #installGuideModal h2,
+body.light-mode #installGuideModal h3,
+body.light-mode #installGuideModal p,
+body.light-mode #installGuideModal li,
+body.light-mode #installGuideModal b,
+body.light-mode #installGuideModal strong,
+body.light-mode #installGuideModal span {
+  color:#172033 !important;
+  opacity:1 !important;
+}
+body.light-mode #installGuideModal h2,
+body.light-mode #installGuideModal h3 {
+  color:#111827 !important;
+  font-weight:800 !important;
+}
+body.light-mode #installGuideModal > div > div:not(:first-child) {
+  background:#f8fafc !important;
+  border-color:#dbe3ef !important;
+}
+body.light-mode #installGuideModal button {
+  color:#172033 !important;
+}
+body.light-mode #installGuideModal #okInstall {
+  background:#6366f1 !important;
+  color:#ffffff !important;
+}
+
+/* 📲 FENÊTRE INSTALLATION CLASSIQUE */
+body.light-mode #installModal,
+body.light-mode #installModal .modal-box,
+body.light-mode #installModal .install-card,
+body.light-mode #installModal .install-platform {
+  color:#172033 !important;
+}
+body.light-mode #installModal .modal-box {
+  background:#ffffff !important;
+  border-color:#dbe3ef !important;
+}
+body.light-mode #installModal .install-card {
+  background:#ffffff !important;
+  border-color:#dbe3ef !important;
+}
+body.light-mode #installModal .install-platform {
+  background:#f8fafc !important;
+  border-color:#e2e8f0 !important;
+}
+body.light-mode #installModal h2,
+body.light-mode #installModal h3,
+body.light-mode #installModal p,
+body.light-mode #installModal li,
+body.light-mode #installModal strong,
+body.light-mode #installModal b,
+body.light-mode #installModal span {
+  color:#172033 !important;
+  opacity:1 !important;
+}
+body.light-mode #installModal h2,
+body.light-mode #installModal h3 {
+  color:#111827 !important;
+  font-weight:800 !important;
+}
+
+/* 🍎 iPhone / iPad + 🤖 Android — tous les blocs possibles */
+body.light-mode .install-card h3,
+body.light-mode .install-card p,
+body.light-mode .install-card li,
+body.light-mode .install-card strong,
+body.light-mode .install-card b,
+body.light-mode .install-platform,
+body.light-mode .install-platform * {
+  color:#172033 !important;
+}
+
+/* 🆘 FENÊTRE "COMMENT INSTALLER" */
+body.light-mode #installHelp,
+body.light-mode #installHelp > div,
+body.light-mode #installHelp > div > div {
+  color:#172033 !important;
+}
+body.light-mode #installHelp > div {
+  background:#ffffff !important;
+  border:1px solid #dbe3ef !important;
+}
+body.light-mode #installHelp > div > div {
+  background:#eef2ff !important;
+  border:1px solid #dbe3ef !important;
+}
+body.light-mode #installHelp h2,
+body.light-mode #installHelp h3,
+body.light-mode #installHelp p,
+body.light-mode #installHelp li,
+body.light-mode #installHelp b,
+body.light-mode #installHelp strong,
+body.light-mode #installHelp span {
+  color:#172033 !important;
+  opacity:1 !important;
+}
+body.light-mode #installHelp h2,
+body.light-mode #installHelp h3 {
+  color:#111827 !important;
+  font-weight:800 !important;
+}
+body.light-mode #installHelp button[onclick="closeInstallHelp()"] {
+  background:#6366f1 !important;
+  color:#ffffff !important;
+}
+
+/* 📲 BOUTON "INSTALLER MA LISTE" */
+body.light-mode .install-main-btn,
+body.light-mode .save-btn.install-main-btn,
+body.light-mode #nativeInstallBtn {
+  background:#6366f1 !important;
+  color:#ffffff !important;
+  border-color:#6366f1 !important;
+  font-weight:800 !important;
+}
+
+/* Boutons du menu Profil */
+body.light-mode .profile-menu button {
+  color:#172033 !important;
+}
+
+/* ☀️ MODE CLAIR dans Préférences */
+body.light-mode #prefLightBtn {
+  color:#ffffff !important;
+  background:#6366f1 !important;
+  border-color:#6366f1 !important;
+  font-weight:800 !important;
+}
+body.light-mode #prefDarkBtn {
+  color:#172033 !important;
+  background:#ffffff !important;
+  border-color:#cbd5e1 !important;
+  font-weight:800 !important;
+}
+</style>
+
+
+<style id="mode-clair-bouton-final">
+/* ===== MODE CLAIR : boutons de sélection du thème ===== */
+body.light-mode .preference-theme-buttons button,
+body.light-mode #prefLightBtn,
+body.light-mode #prefDarkBtn {
+  color:#172033 !important;
+  background:#ffffff !important;
+  border:1px solid #cbd5e1 !important;
+  font-weight:800 !important;
+  text-shadow:none !important;
+  opacity:1 !important;
+  -webkit-text-fill-color:#172033 !important;
+}
+body.light-mode .preference-theme-buttons button.active,
+body.light-mode #prefLightBtn.active,
+body.light-mode #prefDarkBtn.active {
+  color:#ffffff !important;
+  background:#6366f1 !important;
+  border-color:#6366f1 !important;
+  -webkit-text-fill-color:#ffffff !important;
+}
+body.light-mode #prefLightBtn,
+body.light-mode #prefLightBtn * {
+  color:inherit !important;
+  -webkit-text-fill-color:inherit !important;
+}
+</style>
+
 </head>
 
 
