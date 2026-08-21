@@ -1258,35 +1258,61 @@ body.light-mode .theme-choice button{
 </style>
 
 
-<style id="ma-liste-light-theme">
+<style id="ma-liste-theme-fix-final">
+.preference-theme-box{
+  margin:12px 0;
+  padding:14px;
+  border-radius:14px;
+  background:#0d1524;
+  border:1px solid #26344b;
+}
+.preference-theme-buttons{
+  display:flex;
+  gap:10px;
+  margin-top:12px;
+}
+.preference-theme-buttons button{
+  flex:1;
+  padding:12px 8px;
+  border-radius:11px;
+  border:1px solid #34425a;
+  background:#172033;
+  color:#fff;
+  font-weight:700;
+  cursor:pointer;
+}
+.preference-theme-buttons button.active{
+  border-color:#6366f1;
+  box-shadow:0 0 0 2px rgba(99,102,241,.18);
+}
 body.light-mode{
   background:#f4f7fb !important;
   color:#172033 !important;
 }
 body.light-mode .app,
-body.light-mode .page,
+body.light-mode .topbar,
+body.light-mode .bottom-nav,
 body.light-mode .card,
 body.light-mode .stat-card,
+body.light-mode .task,
 body.light-mode .task-card,
-body.light-mode .profile-option,
 body.light-mode .profile-card,
+body.light-mode .profile-option,
+body.light-mode .modal-box,
 body.light-mode .modal-content,
-body.light-mode .guide-card,
-body.light-mode .guide-hero{
+body.light-mode .hero,
+body.light-mode .welcome,
+body.light-mode .calendar-card,
+body.light-mode .stats-card{
   background:#fff !important;
   color:#172033 !important;
   border-color:#dbe3ef !important;
 }
-body.light-mode .topbar,
-body.light-mode .bottom-nav{
-  background:#fff !important;
-  border-color:#dbe3ef !important;
-}
-body.light-mode p,
-body.light-mode .muted,
+body.light-mode .profile-email,
 body.light-mode .profile-option-subtitle,
-body.light-mode .guide-card p,
-body.light-mode .guide-hero p{
+body.light-mode .stat-label,
+body.light-mode .task-meta,
+body.light-mode .muted{
   color:#64748b !important;
 }
 body.light-mode input,
@@ -1296,39 +1322,21 @@ body.light-mode select{
   color:#172033 !important;
   border-color:#dbe3ef !important;
 }
-body.light-mode .theme-panel{
+body.light-mode .preference-theme-box{
   background:#f8fafc !important;
   border-color:#dbe3ef !important;
 }
-.theme-panel{
-  margin-top:10px;
-  padding:12px;
-  border-radius:14px;
-  background:#111a2b;
-  border:1px solid #263650;
+body.light-mode .preference-theme-buttons button{
+  background:#fff !important;
+  color:#172033 !important;
+  border-color:#cbd5e1 !important;
 }
-.theme-buttons{
-  display:flex;
-  gap:8px;
+body.light-mode .profile-menu{
+  background:#fff !important;
+  border-color:#dbe3ef !important;
 }
-.theme-buttons button{
-  flex:1;
-  padding:11px 8px;
-  border:1px solid #334155;
-  border-radius:11px;
-  background:#18243a;
-  color:#fff;
-  font-weight:700;
-  cursor:pointer;
-}
-body.light-mode .theme-buttons button{
-  background:#fff;
-  color:#172033;
-  border-color:#dbe3ef;
-}
-.theme-buttons button.selected{
-  border-color:#6366f1 !important;
-  box-shadow:0 0 0 2px rgba(99,102,241,.18);
+body.light-mode .profile-menu button{
+  color:#172033 !important;
 }
 </style>
 
@@ -1544,15 +1552,6 @@ body.light-mode .theme-buttons button{
 
     </div>
 
-
-<div id="preferenceTheme" style="margin:12px 0;padding:14px;border-radius:14px;background:#111a2b;border:1px solid #263650;">
-  <div style="font-weight:700;margin-bottom:5px;">🎨 Mode d’affichage</div>
-  <div style="font-size:13px;opacity:.75;margin-bottom:10px;">Choisis le thème de Ma Liste</div>
-  <div style="display:flex;gap:8px;">
-    <button type="button" onclick="setMaListeTheme('dark')" style="flex:1;padding:11px;border-radius:11px;">🌙 Sombre</button>
-    <button type="button" onclick="setMaListeTheme('light')" style="flex:1;padding:11px;border-radius:11px;">☀️ Clair</button>
-  </div>
-</div>
 </section>
 
 
@@ -1883,7 +1882,6 @@ body.light-mode .theme-buttons button{
 <div class="profile-option" onclick="openProfileModal('backup')">
 <div class="profile-option-left"><span>☁</span><div><div class="profile-option-title">Sauvegarde</div><div class="profile-option-subtitle">Exporter ou importer vos tâches</div></div></div><span class="arrow">›</span>
 </div>
-
 
 
 <div class="profile-option" onclick="showPage('guidePage',document.querySelector('.nav-item:last-child'))">
@@ -3424,12 +3422,19 @@ function openProfileModal(type){
   } else if(type==="preferences"){
     box.innerHTML=`
       <h2>Préférences</h2>
-      <div class="profile-option"><div><div class="profile-option-title">Mode sombre</div><div class="profile-option-subtitle">Conserver l'apparence sombre</div></div>
-      <label class="switch"><input id="darkModeToggle" type="checkbox" ${profile.dark?"checked":""} onchange="toggleDarkMode(this.checked)"><span class="slider"></span></label></div>
+      <div class="preference-theme-box">
+        <div class="profile-option-title">🎨 Mode d'affichage</div>
+        <div class="profile-option-subtitle">Choisis entre le mode clair et le mode sombre</div>
+        <div class="preference-theme-buttons">
+          <button type="button" id="prefLightBtn" onclick="setTheme(false)">☀️ Mode clair</button>
+          <button type="button" id="prefDarkBtn" onclick="setTheme(true)">🌙 Mode sombre</button>
+        </div>
+      </div>
       <div class="profile-option"><div><div class="profile-option-title">Affichage compact</div><div class="profile-option-subtitle">Réduire l'espace entre les tâches</div></div>
       <label class="switch"><input id="compactToggle" type="checkbox" ${profile.compact?"checked":""} onchange="toggleCompact(this.checked)"><span class="slider"></span></label></div>
       <div class="info-box">Les préférences sont enregistrées directement sur cet appareil et restent disponibles hors connexion.</div>
       <div class="modal-buttons"><button class="save-btn" onclick="closeProfileModal()">Fermer</button></div>`;
+    setTimeout(updateThemeButtons, 0);
   } else if(type==="notifications"){
     box.innerHTML=`
       <h2>Notifications</h2>
@@ -3501,7 +3506,23 @@ function saveAccount(){
   if(!name){showToast("Le nom est obligatoire");return}
   profile.name=name; profile.email=email; saveProfile(); closeProfileModal(); showToast("Profil enregistré ✓");
 }
-function toggleDarkMode(value){profile.dark=value;saveProfile();showToast(value?"Mode sombre activé":"Mode sombre conservé")}
+function applyTheme(isDark){
+  profile.dark=!!isDark;
+  document.body.classList.toggle("light-mode",!profile.dark);
+  saveProfile();
+  updateThemeButtons();
+}
+function setTheme(isDark){
+  applyTheme(isDark);
+  showToast(isDark ? "🌙 Mode sombre activé" : "☀️ Mode clair activé");
+}
+function updateThemeButtons(){
+  const light=document.getElementById("prefLightBtn");
+  const dark=document.getElementById("prefDarkBtn");
+  if(light) light.classList.toggle("active", !profile.dark);
+  if(dark) dark.classList.toggle("active", !!profile.dark);
+}
+function toggleDarkMode(value){ setTheme(value); }
 function toggleCompact(value){
   profile.compact=value;saveProfile();
   document.body.classList.toggle("compact-mode",value);
@@ -3654,43 +3675,12 @@ document.getElementById("installModal").addEventListener("click", function(event
 </div></div>
 <script>function openInstallHelp(){document.getElementById('installHelp').style.display='block'} function closeInstallHelp(){document.getElementById('installHelp').style.display='none'}</script>
 
-<script id="theme-switcher">
-(function(){
-  const saved = localStorage.getItem("maListeTheme");
-  function applyTheme(theme){
-    const light = theme === "light";
-    document.body.classList.toggle("light-mode", light);
-    document.documentElement.classList.toggle("light-mode", light);
-    localStorage.setItem("maListeTheme", light ? "light" : "dark");
-    document.querySelectorAll("[data-theme-choice]").forEach(b=>{
-      b.classList.toggle("active", b.dataset.themeChoice === theme);
-    });
+<script>
+document.addEventListener("DOMContentLoaded", function(){
+  if(typeof profile !== "undefined"){
+    applyTheme(profile.dark !== false);
   }
-  window.setMaListeTheme = applyTheme;
-  document.addEventListener("DOMContentLoaded", ()=>{
-    applyTheme(saved || "dark");
-  });
-})();
-</script>
-
-
-<script id="ma-liste-theme-js">
-function setMaListeTheme(theme){
-  const light = theme === "light";
-  document.body.classList.toggle("light-mode", light);
-  localStorage.setItem("maListeTheme", light ? "light" : "dark");
-  const d=document.getElementById("themeDarkBtn");
-  const l=document.getElementById("themeLightBtn");
-  if(d) d.classList.toggle("selected", !light);
-  if(l) l.classList.toggle("selected", light);
-  showToast(light ? "☀️ Mode clair activé" : "🌙 Mode sombre activé");
-}
-(function(){
-  const theme=localStorage.getItem("maListeTheme") || "dark";
-  document.addEventListener("DOMContentLoaded",function(){
-    setMaListeTheme(theme);
-  });
-})();
+});
 </script>
 
 </body>
