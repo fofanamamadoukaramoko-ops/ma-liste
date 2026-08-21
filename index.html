@@ -2318,6 +2318,240 @@ body.light-mode #prefLightBtn * {
 }
 </style>
 
+
+<style id="preference-theme-visibility-final">
+/* =========================================================
+   MA LISTE — PRÉFÉRENCES : BOUTONS MODE CLAIR / SOMBRE
+   Correction définitive de la lisibilité.
+   ========================================================= */
+
+/* Conteneur */
+#profileModal .preference-theme-buttons{
+  display:flex !important;
+  gap:10px !important;
+  width:100% !important;
+  margin-top:12px !important;
+}
+
+/* Les deux boutons */
+#profileModal .preference-theme-buttons button,
+#profileModal #prefLightBtn,
+#profileModal #prefDarkBtn{
+  flex:1 1 0 !important;
+  min-height:46px !important;
+  padding:12px 10px !important;
+  border-radius:12px !important;
+  border:2px solid #cbd5e1 !important;
+  background:#ffffff !important;
+  color:#172033 !important;
+  -webkit-text-fill-color:#172033 !important;
+  font-family:Arial,Helvetica,sans-serif !important;
+  font-size:13px !important;
+  font-weight:800 !important;
+  line-height:1.2 !important;
+  text-align:center !important;
+  opacity:1 !important;
+  text-shadow:none !important;
+  cursor:pointer !important;
+  visibility:visible !important;
+}
+
+/* Mode clair sélectionné */
+#profileModal #prefLightBtn.active,
+body.light-mode #profileModal #prefLightBtn.active{
+  background:#4f46e5 !important;
+  border-color:#4f46e5 !important;
+  color:#ffffff !important;
+  -webkit-text-fill-color:#ffffff !important;
+  box-shadow:0 0 0 3px rgba(79,70,229,.16) !important;
+}
+
+/* Mode sombre non sélectionné en mode clair */
+body.light-mode #profileModal #prefDarkBtn{
+  background:#ffffff !important;
+  border-color:#cbd5e1 !important;
+  color:#172033 !important;
+  -webkit-text-fill-color:#172033 !important;
+}
+
+/* Mode sombre : bouton clair non sélectionné */
+body:not(.light-mode) #profileModal #prefLightBtn{
+  background:#172033 !important;
+  border-color:#475569 !important;
+  color:#ffffff !important;
+  -webkit-text-fill-color:#ffffff !important;
+}
+
+/* Mode sombre sélectionné */
+body:not(.light-mode) #profileModal #prefDarkBtn.active{
+  background:#4f46e5 !important;
+  border-color:#4f46e5 !important;
+  color:#ffffff !important;
+  -webkit-text-fill-color:#ffffff !important;
+  box-shadow:0 0 0 3px rgba(79,70,229,.18) !important;
+}
+
+/* Survol */
+#profileModal #prefLightBtn:hover,
+#profileModal #prefDarkBtn:hover{
+  filter:brightness(.97) !important;
+}
+
+/* Empêche les règles globales de modifier le texte des boutons */
+body.light-mode #profileModal .preference-theme-buttons button *,
+body:not(.light-mode) #profileModal .preference-theme-buttons button *{
+  color:inherit !important;
+  -webkit-text-fill-color:inherit !important;
+}
+
+/* Mobile */
+@media(max-width:480px){
+  #profileModal .preference-theme-buttons{
+    gap:8px !important;
+  }
+
+  #profileModal .preference-theme-buttons button,
+  #profileModal #prefLightBtn,
+  #profileModal #prefDarkBtn{
+    min-height:44px !important;
+    padding:10px 6px !important;
+    font-size:12px !important;
+  }
+}
+</style>
+
+
+<style id="guide-back-bottom-and-creator-dark-final">
+/* =========================================================
+   GUIDE : bouton « Retour au profil » en bas
+   ========================================================= */
+#guidePage{
+  position:relative !important;
+  min-height:calc(100vh - 150px) !important;
+  padding-bottom:90px !important;
+}
+
+
+/* Le bouton reste visuellement en bas du contenu du guide */
+
+/* =========================================================
+   PROFIL : créateur sur UNE SEULE LIGNE en mode sombre
+   ========================================================= */
+body:not(.light-mode) #profileModal .creator-box{
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  width:100% !important;
+  box-sizing:border-box !important;
+  padding:10px 12px !important;
+  min-height:42px !important;
+  overflow:hidden !important;
+}
+
+body:not(.light-mode) #profileModal .creator-box strong{
+  display:block !important;
+  color:#ffffff !important;
+  font-size:13px !important;
+  font-weight:800 !important;
+  line-height:1.2 !important;
+  white-space:nowrap !important;
+  text-align:center !important;
+  margin:0 !important;
+}
+
+body:not(.light-mode) #profileModal .creator-box small{
+  display:none !important;
+}
+
+/* Sécurité : aucun élément interne ne force un retour à la ligne */
+body:not(.light-mode) #profileModal .creator-box strong *{
+  white-space:nowrap !important;
+}
+
+/* Version petits écrans */
+@media(max-width:480px){
+  body:not(.light-mode) #profileModal .creator-box{
+    padding:9px 8px !important;
+  }
+
+  body:not(.light-mode) #profileModal .creator-box strong{
+    font-size:12px !important;
+  }
+}
+</style>
+
+
+<style id="final-guide-position-fix">
+/* =========================================================
+   CORRECTION DÉFINITIVE — GUIDE DE MA LISTE
+   Le bouton Retour au profil est réellement placé APRÈS
+   tout le contenu du guide, donc visuellement en bas.
+   ========================================================= */
+
+#guidePage{
+  display:flex !important;
+  flex-direction:column !important;
+  min-height:calc(100vh - 145px) !important;
+  box-sizing:border-box !important;
+  padding-bottom:105px !important;
+}
+
+/* Ordre réel des éléments du guide */
+#guidePage > .section-header{order:1 !important;}
+#guidePage > .guide-hero{order:2 !important;}
+#guidePage > .guide-grid{order:3 !important;}
+#guidePage > .guide-tip{order:4 !important;}
+
+/* Retour au profil = DERNIER élément */
+
+/* =========================================================
+   CRÉATEUR — MODE SOMBRE : UNE SEULE LIGNE
+   ========================================================= */
+
+body:not(.light-mode) #profileModal .creator-box{
+  width:100% !important;
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  box-sizing:border-box !important;
+  overflow:hidden !important;
+  white-space:nowrap !important;
+}
+
+body:not(.light-mode) #profileModal .creator-box strong{
+  display:block !important;
+  width:auto !important;
+  max-width:100% !important;
+  margin:0 !important;
+  padding:0 !important;
+  color:#fff !important;
+  -webkit-text-fill-color:#fff !important;
+  font-weight:800 !important;
+  font-size:13px !important;
+  line-height:1.2 !important;
+  white-space:nowrap !important;
+  text-align:center !important;
+}
+
+body:not(.light-mode) #profileModal .creator-box small{
+  display:none !important;
+}
+
+@media(max-width:480px){
+  #guidePage{
+    padding-bottom:100px !important;
+  }
+
+  #guidePage > .guide-back{
+    margin-top:20px !important;
+  }
+
+  body:not(.light-mode) #profileModal .creator-box strong{
+    font-size:11.5px !important;
+  }
+}
+</style>
+
 </head>
 
 
@@ -2861,11 +3095,6 @@ body.light-mode #prefLightBtn * {
 <div class="profile-option-left"><span>☁</span><div><div class="profile-option-title">Sauvegarde</div><div class="profile-option-subtitle">Exporter ou importer vos tâches</div></div></div><span class="arrow">›</span>
 </div>
 
-
-<div class="profile-option" onclick="showPage('guidePage',document.querySelector('.nav-item:last-child'))">
-<div class="profile-option-left"><span>📘</span><div><div class="profile-option-title">Comment utiliser Ma Liste ?</div><div class="profile-option-subtitle">Découvrir toutes les fonctions de l'application</div></div></div><span class="arrow">›</span>
-</div>
-
 <div class="profile-option" onclick="openProfileModal('about')">
 <div class="profile-option-left"><span>ⓘ</span><div><div class="profile-option-title">À propos</div><div class="profile-option-subtitle">Ma Liste v1.1</div></div></div><span class="arrow">›</span>
 </div>
@@ -2880,10 +3109,6 @@ body.light-mode #prefLightBtn * {
   <div class="section-header">
     <h3>Guide de Ma Liste</h3>
   </div>
-
-  <button class="save-btn guide-back" onclick="showPage('profilePage',document.querySelector('.nav-item:last-child'))">
-    ← Retour au profil
-  </button>
 
   <div class="guide-hero">
     <h2>📘 Bienvenue sur Ma Liste</h2>
@@ -4443,6 +4668,10 @@ function openProfileModal(type){
       <div class="modal-buttons"><button class="save-btn" onclick="closeProfileModal()">Fermer</button></div>`;
   }
   modal.classList.add("show");
+}
+
+function openInstallGuide(){
+  showInstallGuide();
 }
 
 function showInstallGuide(){
