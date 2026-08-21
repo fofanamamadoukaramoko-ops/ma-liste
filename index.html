@@ -3130,10 +3130,32 @@ function openProfileModal(type){
         <strong>👨‍💻 Créé et développé par Mamadou K. Fofana</strong>
         <small>Conception · Développement · 2026</small>
       </div>
-      <button class="save-btn install-main-btn" onclick="closeProfileModal();openInstallModal()">📲 Comment installer Ma Liste ?</button>
+      <button class="save-btn install-main-btn" onclick="closeProfileModal();showInstallGuide()">📲 Comment installer Ma Liste ?</button>
       <div class="modal-buttons"><button class="save-btn" onclick="closeProfileModal()">Fermer</button></div>`;
   }
   modal.classList.add("show");
+}
+
+function showInstallGuide(){
+  let modal=document.getElementById("installGuideModal");
+  if(!modal){
+    modal=document.createElement("div");
+    modal.id="installGuideModal";
+    modal.style.cssText="position:fixed;inset:0;z-index:99999;background:rgba(0,0,0,.78);padding:20px;overflow:auto;display:flex;align-items:center;justify-content:center;";
+    modal.innerHTML=`<div style="width:min(560px,100%);background:#111a2b;color:#fff;border:1px solid #2b3952;border-radius:20px;padding:22px;">
+      <div style="display:flex;justify-content:space-between;align-items:center;"><h2 style="margin:0">📲 Installer Ma Liste</h2><button id="xInstall" style="border:0;background:transparent;color:#fff;font-size:28px;cursor:pointer">×</button></div>
+      <div style="background:#0d1729;border:1px solid #263650;border-radius:14px;padding:15px;margin-top:15px"><h3>🍎 iPhone / iPad</h3>
+      <ol style="line-height:1.7"><li>Ouvre Ma Liste avec <b>Safari</b>.</li><li>Appuie sur <b>Partager</b> ⬆️.</li><li>Choisis <b>Sur l’écran d’accueil</b>.</li><li>Appuie sur <b>Ajouter</b>.</li><li>🎉 Ma Liste apparaît sur ton écran d’accueil.</li></ol></div>
+      <div style="background:#0d1729;border:1px solid #263650;border-radius:14px;padding:15px;margin-top:12px"><h3>🤖 Android</h3>
+      <ol style="line-height:1.7"><li>Ouvre Ma Liste avec <b>Chrome</b>.</li><li>Appuie sur <b>⋮</b>.</li><li>Choisis <b>Installer l’application</b> ou <b>Ajouter à l’écran d’accueil</b>.</li><li>Appuie sur <b>Installer</b> ou <b>Ajouter</b>.</li><li>🎉 Ma Liste apparaît sur ton écran d’accueil.</li></ol></div>
+      <button id="okInstall" style="width:100%;margin-top:15px;padding:14px;border:0;border-radius:12px;background:#6366f1;color:#fff;font-weight:700;cursor:pointer">J’ai compris</button>
+    </div>`;
+    document.body.appendChild(modal);
+    const close=()=>modal.remove();
+    document.getElementById("xInstall").onclick=close;
+    document.getElementById("okInstall").onclick=close;
+  }
+  modal.style.display="flex";
 }
 function closeProfileModal(){document.getElementById("profileModal").classList.remove("show")}
 function previewProfilePhoto(event){
